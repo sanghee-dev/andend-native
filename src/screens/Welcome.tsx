@@ -1,11 +1,18 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import styled from "styled-components/native";
 
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+const TouchableOpacity = styled.TouchableOpacity``;
+const Text = styled.Text``;
 export default function Welcome({ navigation }: any) {
   return (
-    <View>
+    <Container>
       <StatusBar style="auto" />
       <MaterialCommunityIcons name="coffee-outline" size={24} color="black" />
       <TouchableOpacity onPress={() => navigation.navigate("CreateAccount")}>
@@ -14,6 +21,6 @@ export default function Welcome({ navigation }: any) {
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Text>Login</Text>
       </TouchableOpacity>
-    </View>
+    </Container>
   );
 }
