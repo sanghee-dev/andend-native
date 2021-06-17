@@ -3,7 +3,7 @@ import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import LoggedOutNav from "./navigators/LoggedOutNav";
+import LoggedOutNav from "./src/navigators/LoggedOutNav";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
 export default function App() {
