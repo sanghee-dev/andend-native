@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import LoggedOutNav from "./src/navigators/LoggedOutNav";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
-import ContextProvider from "./src/context/context";
 
 export default function App() {
   const [loading, setLoading] = useState<boolean>(true);
   const colorScheme = useColorScheme();
 
   const preload = () => {
-    const fontsToLoad = [MaterialCommunityIcons.font];
+    const fontsToLoad = [Ionicons.font];
     const fontPromises = fontsToLoad.map((font) => Font.loadAsync(font));
     const imagesToLoad = [
       require("./assets/logo.png"),
@@ -28,10 +27,8 @@ export default function App() {
   return loading ? (
     <AppLoading startAsync={preload} onFinish={onFinish} onError={onError} />
   ) : (
-    <ContextProvider>
-      <AppearanceProvider>
-        <LoggedOutNav />
-      </AppearanceProvider>
-    </ContextProvider>
+    <AppearanceProvider>
+      <LoggedOutNav />
+    </AppearanceProvider>
   );
 }
