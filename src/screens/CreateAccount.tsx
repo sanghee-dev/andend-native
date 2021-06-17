@@ -1,23 +1,14 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import styled from "styled-components/native";
-
-const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
-const TouchableOpacity = styled.TouchableOpacity``;
-const Text = styled.Text``;
+import { Container, BlueButton, BlueButtonText } from "../styles";
 
 export default function CreateAccount({ navigation }: any) {
+  const goToLogin = () => navigation.navigate("Login");
+
   return (
     <Container>
-      <StatusBar style="auto" />
-      <Text>CreateAccount</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-        <Text>Login</Text>
-      </TouchableOpacity>
+      <BlueButton onPress={goToLogin}>
+        <BlueButtonText>Login</BlueButtonText>
+      </BlueButton>
     </Container>
   );
 }

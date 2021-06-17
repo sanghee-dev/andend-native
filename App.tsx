@@ -5,9 +5,11 @@ import * as Font from "expo-font";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import LoggedOutNav from "./src/navigators/LoggedOutNav";
 import { AppearanceProvider, useColorScheme } from "react-native-appearance";
+import ContextProvider from "./src/context/context";
 
 export default function App() {
   const [loading, setLoading] = useState<boolean>(true);
+  const colorScheme = useColorScheme();
 
   const preload = () => {
     const fontsToLoad = [MaterialCommunityIcons.font];
@@ -23,13 +25,13 @@ export default function App() {
   const onFinish = () => setLoading(false);
   const onError = () => console.warn;
 
-  const colorScheme = useColorScheme();
-
   return loading ? (
     <AppLoading startAsync={preload} onFinish={onFinish} onError={onError} />
   ) : (
-    <AppearanceProvider>
-      <LoggedOutNav />
-    </AppearanceProvider>
+    <ContextProvider>
+      <AppearanceProvider>
+        <LoggedOutNav />
+      </AppearanceProvider>
+    </ContextProvider>
   );
 }
