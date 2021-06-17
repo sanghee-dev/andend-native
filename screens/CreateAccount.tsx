@@ -1,14 +1,15 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-export default function CreateAccount() {
+export default function CreateAccount({ navigation }: any) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Text>CreateAccount</Text>
-      <MaterialCommunityIcons name="coffee-outline" size={24} color="black" />
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <Text>Login</Text>
+      </TouchableOpacity>
     </View>
   );
 }
