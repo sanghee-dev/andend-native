@@ -1,6 +1,7 @@
 import React from "react";
 import {
-  Container,
+  WelcomeContainer,
+  View,
   BlueButton,
   BlueButtonText,
   TextButton,
@@ -13,14 +14,16 @@ export default function Welcome({ navigation }: any) {
   const goToLogin = () => navigation.navigate("Login");
 
   return (
-    <Container>
+    <WelcomeContainer>
       <Logo source={require("../../assets/logo.png")} resizeMode="contain" />
-      <BlueButton onPress={goToCreateAccount} style={{ marginBottom: 8 }}>
-        <BlueButtonText>Create Account</BlueButtonText>
-      </BlueButton>
-      <TextButton onPress={goToLogin}>
-        <TextButtonText>Login</TextButtonText>
-      </TextButton>
-    </Container>
+      <View>
+        <BlueButton onPress={goToCreateAccount} style={{ marginBottom: 8 }}>
+          <BlueButtonText>Create Account</BlueButtonText>
+        </BlueButton>
+        <TextButton onPress={goToLogin}>
+          <TextButtonText>Login</TextButtonText>
+        </TextButton>
+      </View>
+    </WelcomeContainer>
   );
 }

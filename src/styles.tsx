@@ -1,5 +1,6 @@
 import styled from "styled-components/native";
 
+// colors
 export const colors = {
   blue: "rgb(0,149,246)",
   red: "rgb(240,73,86)",
@@ -11,6 +12,7 @@ export const colors = {
   black: "rgb(0,0,0)",
 };
 
+// space
 const spaceUnit = 8;
 const ratio = 1.5;
 export const space = {
@@ -20,15 +22,29 @@ export const space = {
   paddingTopBottom: `${spaceUnit}px ${spaceUnit * ratio}px`,
 };
 
-export const Container = styled.View`
-  flex: 1;
-  justify-content: center;
+export const View = styled.View`
+  width: 100%;
   align-items: center;
-  background-color: ${colors.white};
 `;
-
 export const Text = styled.Text``;
 
+// Container
+const ContainerSharedProps = `
+  flex: 1;
+  background-color: ${colors.white};
+`;
+export const Container = styled.View`
+  ${ContainerSharedProps};
+  justify-content: center;
+  align-items: center;
+`;
+export const WelcomeContainer = styled.View`
+  ${ContainerSharedProps};
+  justify-content: space-around;
+  align-items: center;
+`;
+
+// Button
 const ButtonSharedProps = `
   width: 80%;
   align-items: center;
@@ -43,6 +59,7 @@ export const TextButton = styled.TouchableOpacity`
   ${ButtonSharedProps};
 `;
 
+// ButtonText
 const ButtonTextSharedProps = `
   font-weight: 500;
   font-size: 16px;
@@ -56,6 +73,7 @@ export const TextButtonText = styled.Text`
   color: ${colors.blue};
 `;
 
+// Image
 export const Logo = styled.Image`
   max-width: 50%;
 `;
