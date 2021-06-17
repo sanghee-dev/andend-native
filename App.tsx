@@ -4,6 +4,7 @@ import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import LoggedOutNav from "./navigators/LoggedOutNav";
+import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 
 export default function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -22,9 +23,13 @@ export default function App() {
   const onFinish = () => setLoading(false);
   const onError = () => console.warn;
 
+  const colorScheme = useColorScheme();
+
   return loading ? (
     <AppLoading startAsync={preload} onFinish={onFinish} onError={onError} />
   ) : (
-    <LoggedOutNav />
+    <AppearanceProvider>
+      <LoggedOutNav />
+    </AppearanceProvider>
   );
 }

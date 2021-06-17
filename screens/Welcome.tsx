@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default function Welcome({ navigation }: any) {
   return (
-    <View style={styles.container}>
+    <>
       <StatusBar style="auto" />
       <MaterialCommunityIcons name="coffee-outline" size={24} color="black" />
       <TouchableOpacity onPress={() => navigation.navigate("CreateAccount")}>
@@ -14,15 +14,6 @@ export default function Welcome({ navigation }: any) {
       <TouchableOpacity onPress={() => navigation.navigate("Login")}>
         <Text>Login</Text>
       </TouchableOpacity>
-    </View>
+    </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
