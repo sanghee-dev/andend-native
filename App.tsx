@@ -1,21 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import AppLoading from "expo-app-loading";
+import { Asset } from "expo-asset";
+import * as Font from "expo-font";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import LoggedOutNav from "./navigators/LoggedOutNav";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const preload = () => {
+    const fontsToLoad = [MaterialCommunityIcons.font];
+    const fontPromises = fontsToLoad.map((font) => Font.loadAsync(font));
+    const imagesToLoad = [
+      require("./assets/logo.png"),
+      "https://user-images.githubusercontent.com/61302874/121893131-94ab4300-cd58-11eb-90ec-22caac21f50f.png",
+    ];
+    const imagePromises = imagesToLoad.map((image) => Asset.loadAsync(image));
+
+    return Promise.all([...fontPromises, ...imagePromises]);
+  };
+  const onFinish = () => setLoading(false);
+  const onError = () => console.warn;
+
+  return loading ? (
+    <AppLoading startAsync={preload} onFinish={onFinish} onError={onError} />
+  ) : (
+    <LoggedOutNav />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
