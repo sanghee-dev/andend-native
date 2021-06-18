@@ -1,19 +1,21 @@
-import React, { useRef } from "react";
-import AuthLayout from "../styles/auth/AuthLayout";
+import React, { useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
 import {
-  ButtonContainer,
-  BlueButton,
-  BlueButtonText,
+  SolidButton,
+  SolidButtonText,
   TextButton,
   TextButtonText,
 } from "../styles/buttons";
 import { colors } from "../styles/styles";
 
 export default function CreateAccount({ navigation }: any) {
-  const goToWelcome = () => navigation.navigate("Welcome");
   const goToLogin = () => navigation.navigate("Login");
 
+  const { register, handleSubmit, setValue } = useForm();
+
+  const firstNameRef = useRef<HTMLDivElement>();
   const lastNameRef = useRef<HTMLDivElement>();
   const usernameRef = useRef<HTMLDivElement>();
   const emailRef = useRef<HTMLDivElement>();
@@ -22,21 +24,32 @@ export default function CreateAccount({ navigation }: any) {
   const onFocusNext = (next: any) => {
     next?.current?.focus();
   };
-  const onDone = () => {
-    alert("done!");
+  const onValid = (data: any) => {
+    console.log(data);
   };
+
+  useEffect(() => {
+    register("firstName");
+    register("lastName");
+    register("username");
+    register("email");
+    register("password");
+  }, [register]);
 
   return (
     <AuthLayout>
       <AuthTextInput
-        autoFocus={true}
+        ref={firstNameRef}
+        onChangeText={(text) => setValue("firstName", text)}
         onSubmitEditing={() => onFocusNext(lastNameRef)}
         placeholder="First Name"
         placeholderTextColor={colors.grayDark}
         returnKeyType="next"
+        autoFocus={true}
       />
       <AuthTextInput
         ref={lastNameRef}
+        onChangeText={(text) => setValue("lastName", text)}
         onSubmitEditing={() => onFocusNext(usernameRef)}
         placeholder="Last Name"
         placeholderTextColor={colors.grayDark}
@@ -44,13 +57,16 @@ export default function CreateAccount({ navigation }: any) {
       />
       <AuthTextInput
         ref={usernameRef}
+        onChangeText={(text) => setValue("username", text)}
         onSubmitEditing={() => onFocusNext(emailRef)}
         placeholder="Username"
         placeholderTextColor={colors.grayDark}
         returnKeyType="next"
+        autoCapitalize="none"
       />
       <AuthTextInput
         ref={emailRef}
+        onChangeText={(text) => setValue("email", text)}
         onSubmitEditing={() => onFocusNext(passwordRef)}
         placeholder="Email"
         placeholderTextColor={colors.grayDark}
@@ -59,7 +75,8 @@ export default function CreateAccount({ navigation }: any) {
       />
       <AuthTextInput
         ref={passwordRef}
-        onSubmitEditing={onDone}
+        onChangeText={(text) => setValue("password", text)}
+        onSubmitEditing={handleSubmit(onValid)}
         placeholder="Password"
         placeholderTextColor={colors.grayDark}
         secureTextEntry={true}
@@ -67,14 +84,12 @@ export default function CreateAccount({ navigation }: any) {
         lastChild={true}
       />
 
-      <ButtonContainer>
-        <BlueButton onPress={goToLogin}>
-          <BlueButtonText>Login</BlueButtonText>
-        </BlueButton>
-        <TextButton onPress={goToWelcome}>
-          <TextButtonText>Go back to home</TextButtonText>
-        </TextButton>
-      </ButtonContainer>
+      <SolidButton onPress={handleSubmit(onValid)} disabled={false}>
+        <SolidButtonText>Create Account</SolidButtonText>
+      </SolidButton>
+      <TextButton onPress={goToLogin}>
+        <TextButtonText>Login</TextButtonText>
+      </TextButton>
     </AuthLayout>
   );
 }

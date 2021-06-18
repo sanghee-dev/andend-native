@@ -1,11 +1,6 @@
 import styled from "styled-components/native";
 import { colors, fonts, spaces } from "./styles";
 
-export const ButtonContainer = styled.View`
-  width: 100%;
-  align-items: center;
-`;
-
 const ButtonSharedProps = `
   width: 90%;
   align-items: center;
@@ -18,11 +13,11 @@ const ButtonTextSharedProps = `
   font-size: ${fonts.text};
 `;
 
-export const BlueButton = styled.TouchableOpacity`
+export const SolidButton = styled.TouchableOpacity`
   ${ButtonSharedProps};
   background-color: ${colors.green};
 `;
-export const BlueButtonText = styled.Text`
+export const SolidButtonText = styled.Text`
   ${ButtonTextSharedProps};
   color: ${colors.white};
 `;

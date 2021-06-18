@@ -1,9 +1,8 @@
 import React from "react";
-import AuthLayout from "../styles/auth/AuthLayout";
+import AuthLayout from "../components/auth/AuthLayout";
 import {
-  ButtonContainer,
-  BlueButton,
-  BlueButtonText,
+  SolidButton,
+  SolidButtonText,
   TextButton,
   TextButtonText,
 } from "../styles/buttons";
@@ -14,18 +13,16 @@ export default function Welcome({ navigation }: any) {
 
   return (
     <AuthLayout>
-      <ButtonContainer>
-        <BlueButton
-          disabled={false}
-          onPress={goToCreateAccount}
-          style={{ marginBottom: 8 }}
-        >
-          <BlueButtonText>Create Account</BlueButtonText>
-        </BlueButton>
-        <TextButton onPress={goToLogin}>
-          <TextButtonText>Login</TextButtonText>
-        </TextButton>
-      </ButtonContainer>
+      <SolidButton
+        disabled={false}
+        onPress={goToCreateAccount}
+        style={{ marginBottom: 8 }}
+      >
+        <SolidButtonText>Create Account</SolidButtonText>
+      </SolidButton>
+      <TextButton onPress={goToLogin}>
+        <TextButtonText>Login</TextButtonText>
+      </TextButton>
     </AuthLayout>
   );
 }

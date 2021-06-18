@@ -1,7 +1,7 @@
 import React from "react";
 import { Platform, Keyboard } from "react-native";
 import styled from "styled-components/native";
-import { colors } from "../styles";
+import { colors } from "../../styles/styles";
 
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
   flex: 1;
@@ -17,11 +17,6 @@ const KeyboardAvoidingView = styled.KeyboardAvoidingView`
   justify-content: center;
   align-items: center;
 `;
-const Logo = styled.Image`
-  max-width: 50%;
-  width: 100%; /*  for web */
-  margin-top: 80px;
-`;
 
 export default function AuthLayout({ children }: any) {
   const dismissKeyboard = () => {
@@ -29,7 +24,10 @@ export default function AuthLayout({ children }: any) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+    <TouchableWithoutFeedback
+      onPress={dismissKeyboard}
+      disabled={Platform.OS === "web"}
+    >
       <Container>
         <KeyboardAvoidingView
           behavior="padding"

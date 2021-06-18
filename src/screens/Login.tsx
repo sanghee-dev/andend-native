@@ -1,43 +1,49 @@
-import React, { useRef } from "react";
-import AuthLayout from "../styles/auth/AuthLayout";
+import React, { useEffect, useRef } from "react";
+import { useForm } from "react-hook-form";
+import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
 import {
-  ButtonContainer,
-  BlueButton,
-  BlueButtonText,
+  SolidButton,
+  SolidButtonText,
   TextButton,
   TextButtonText,
-  FacebookText,
 } from "../styles/buttons";
 import { colors } from "../styles/styles";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function Login({ navigation }: any) {
-  const goToWelcome = () => navigation.navigate("Welcome");
   const goToCreateAccount = () => navigation.navigate("CreateAccount");
 
+  const { register, handleSubmit, setValue } = useForm();
   const usernameRef = useRef<HTMLDivElement>();
   const passwordRef = useRef<HTMLDivElement>();
 
   const onFocusNext = (next: any) => {
     next?.current?.focus();
   };
-  const onDone = () => {
-    alert("done!");
+  const onValid = (data: any) => {
+    console.log(data);
   };
+
+  useEffect(() => {
+    register("username");
+    register("password");
+  }, [register]);
 
   return (
     <AuthLayout>
       <AuthTextInput
         ref={usernameRef}
+        onChangeText={(text) => setValue("username", text)}
         onSubmitEditing={() => onFocusNext(passwordRef)}
         placeholder="Username"
         placeholderTextColor={colors.grayDark}
         returnKeyType="next"
+        autoCapitalize="none"
       />
       <AuthTextInput
         ref={passwordRef}
-        onSubmitEditing={onDone}
+        onChangeText={(text) => setValue("password", text)}
+        onSubmitEditing={handleSubmit(onValid)}
         placeholder="Password"
         placeholderTextColor={colors.grayDark}
         secureTextEntry={true}
@@ -45,20 +51,16 @@ export default function Login({ navigation }: any) {
         lastChild={true}
       />
 
-      <ButtonContainer>
-        <BlueButton onPress={goToCreateAccount} style={{ marginBottom: 8 }}>
-          <BlueButtonText>Create Account</BlueButtonText>
-        </BlueButton>
-        <TextButton onPress={goToCreateAccount}>
-          <FacebookText>
-            <Ionicons name="logo-facebook" size={20} />
-            {` Log in With Facebook`}
-          </FacebookText>
-        </TextButton>
-        <TextButton onPress={goToWelcome}>
-          <TextButtonText>Go back to home</TextButtonText>
-        </TextButton>
-      </ButtonContainer>
+      <SolidButton
+        onPress={handleSubmit(onValid)}
+        disabled={false}
+        style={{ marginBottom: 8 }}
+      >
+        <SolidButtonText>Log in</SolidButtonText>
+      </SolidButton>
+      <TextButton onPress={goToCreateAccount}>
+        <TextButtonText>Create Account</TextButtonText>
+      </TextButton>
     </AuthLayout>
   );
 }
