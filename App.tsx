@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ApolloProvider } from "@apollo/client";
+import client from "./apollo";
 import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
@@ -27,8 +29,10 @@ export default function App() {
   return loading ? (
     <AppLoading startAsync={preload} onFinish={onFinish} onError={onError} />
   ) : (
-    <AppearanceProvider>
-      <LoggedOutNav />
-    </AppearanceProvider>
+    <ApolloProvider client={client}>
+      <AppearanceProvider>
+        <LoggedOutNav />
+      </AppearanceProvider>
+    </ApolloProvider>
   );
 }
