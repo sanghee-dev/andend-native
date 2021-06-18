@@ -5,12 +5,13 @@ import { colors } from "../styles";
 const Container = styled.View`
   flex: 1;
   background-color: ${colors.white};
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
 export const Logo = styled.Image`
   max-width: 50%;
+  width: 100%; /* for web */
   margin-top: 80px;
 `;
 

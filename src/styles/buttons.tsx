@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { colors, space } from "./styles";
+import { colors, fonts, spaces } from "./styles";
 
 export const ButtonContainer = styled.View`
   width: 100%;
@@ -9,20 +9,20 @@ export const ButtonContainer = styled.View`
 `;
 
 const ButtonSharedProps = `
-  width: 80%;
+  width: 90%;
   align-items: center;
-  padding: ${space.paddingTopBottom};
+  padding: ${spaces.paddingTopBottom};
   border-radius: 100;
   opacity: ${(props: any) => (props.disabled ? 0.5 : 1)};
 `;
 const ButtonTextSharedProps = `
   font-weight: 500;
-  font-size: 18px;
+  font-size: ${fonts.text};
 `;
 
 export const BlueButton = styled.TouchableOpacity`
   ${ButtonSharedProps};
-  background-color: ${colors.blue};
+  background-color: ${colors.orange};
 `;
 export const BlueButtonText = styled.Text`
   ${ButtonTextSharedProps};
@@ -34,7 +34,7 @@ export const TextButton = styled.TouchableOpacity`
 `;
 export const TextButtonText = styled.Text`
   ${ButtonTextSharedProps};
-  color: ${colors.blue};
+  color: ${colors.orange};
 `;
 export const FacebookText = styled.Text`
   ${ButtonTextSharedProps};
