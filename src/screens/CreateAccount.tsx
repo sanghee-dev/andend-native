@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import AuthLayout from "../styles/auth/AuthLayout";
+import { AuthTextInput } from "../styles/inputs";
 import {
   ButtonContainer,
   BlueButton,
@@ -7,7 +8,6 @@ import {
   TextButton,
   TextButtonText,
 } from "../styles/buttons";
-import { AuthTextInput } from "../styles/inputs";
 import { colors } from "../styles/styles";
 
 export default function CreateAccount({ navigation }: any) {

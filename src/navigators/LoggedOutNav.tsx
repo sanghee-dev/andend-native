@@ -32,12 +32,12 @@ export default function LoggedOutNav() {
             </View>
           ),
           headerTransparent: true,
-          headerTintColor: `${colors.grayDark}`,
+          headerTintColor: `${colors.green}`,
         }}
       >
         <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="CreateAccount" component={CreateAccount} />
+        <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
     </NavigationContainer>
   );
