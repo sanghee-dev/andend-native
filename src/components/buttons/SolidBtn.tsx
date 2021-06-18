@@ -26,7 +26,7 @@ export default function SolidBtn({ onPress, disabled, loading, text }: IProps) {
   return (
     <SolidButton onPress={onPress} disabled={disabled}>
       {loading ? (
-        <ActivityIndicator size="small" color={colors.green} />
+        <ActivityIndicator size="small" color={colors.white} />
       ) : (
         <SolidButtonText>{text}</SolidButtonText>
       )}

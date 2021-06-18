@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { isLoggedInVar } from "../../apollo";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
@@ -89,7 +88,7 @@ export default function CreateAccount({ navigation }: any) {
     <AuthLayout>
       <AuthTextInput
         ref={firstNameRef}
-        onChangeText={(text) => setValue("firstName", text)}
+        onChangeText={(text: string) => setValue("firstName", text)}
         onSubmitEditing={() => onFocusNext(lastNameRef)}
         placeholder="First Name"
         placeholderTextColor={colors.grayDark}
@@ -98,7 +97,7 @@ export default function CreateAccount({ navigation }: any) {
       />
       <AuthTextInput
         ref={lastNameRef}
-        onChangeText={(text) => setValue("lastName", text)}
+        onChangeText={(text: string) => setValue("lastName", text)}
         onSubmitEditing={() => onFocusNext(usernameRef)}
         placeholder="Last Name"
         placeholderTextColor={colors.grayDark}
@@ -106,7 +105,7 @@ export default function CreateAccount({ navigation }: any) {
       />
       <AuthTextInput
         ref={usernameRef}
-        onChangeText={(text) => setValue("username", text)}
+        onChangeText={(text: string) => setValue("username", text)}
         onSubmitEditing={() => onFocusNext(emailRef)}
         placeholder="Username"
         placeholderTextColor={colors.grayDark}
@@ -115,7 +114,7 @@ export default function CreateAccount({ navigation }: any) {
       />
       <AuthTextInput
         ref={emailRef}
-        onChangeText={(text) => setValue("email", text)}
+        onChangeText={(text: string) => setValue("email", text)}
         onSubmitEditing={() => onFocusNext(passwordRef)}
         placeholder="Email"
         placeholderTextColor={colors.grayDark}
@@ -124,7 +123,7 @@ export default function CreateAccount({ navigation }: any) {
       />
       <AuthTextInput
         ref={passwordRef}
-        onChangeText={(text) => setValue("password", text)}
+        onChangeText={(text: string) => setValue("password", text)}
         onSubmitEditing={handleSubmit(onValid)}
         placeholder="Password"
         placeholderTextColor={colors.grayDark}

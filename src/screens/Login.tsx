@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { gql, useMutation } from "@apollo/client";
-import { isLoggedInVar } from "../../apollo";
+import { logUserIn } from "../../apollo";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
@@ -43,11 +43,11 @@ export default function Login({ navigation, route: { params } }: any) {
   const onValid = (data: any) => {
     if (!loading) loginMutation({ variables: { ...data } });
   };
-  const onCompleted = (data: ILoginProps) => {
+  const onCompleted = async (data: ILoginProps) => {
     const {
       login: { ok, error, token },
     } = data;
-    if (ok) isLoggedInVar(true);
+    if (ok) await logUserIn(token);
   };
 
   const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
@@ -66,7 +66,7 @@ export default function Login({ navigation, route: { params } }: any) {
     <AuthLayout>
       <AuthTextInput
         ref={usernameRef}
-        onChangeText={(text) => setValue("username", text)}
+        onChangeText={(text: string) => setValue("username", text)}
         onSubmitEditing={() => onFocusNext(passwordRef)}
         value={watch("username")}
         placeholder="Username"
@@ -76,7 +76,7 @@ export default function Login({ navigation, route: { params } }: any) {
       />
       <AuthTextInput
         ref={passwordRef}
-        onChangeText={(text) => setValue("password", text)}
+        onChangeText={(text: string) => setValue("password", text)}
         onSubmitEditing={handleSubmit(onValid)}
         value={watch("password")}
         placeholder="Password"
