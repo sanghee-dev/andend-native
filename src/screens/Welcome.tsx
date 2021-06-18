@@ -1,11 +1,7 @@
 import React from "react";
 import AuthLayout from "../components/auth/AuthLayout";
-import {
-  SolidButton,
-  SolidButtonText,
-  TextButton,
-  TextButtonText,
-} from "../styles/buttons";
+import SolidBtn from "../components/buttons/SolidBtn";
+import TextBtn from "../components/buttons/TextBtn";
 
 export default function Welcome({ navigation }: any) {
   const goToCreateAccount = () => navigation.navigate("CreateAccount");
@@ -13,16 +9,13 @@ export default function Welcome({ navigation }: any) {
 
   return (
     <AuthLayout>
-      <SolidButton
-        disabled={false}
+      <SolidBtn
         onPress={goToCreateAccount}
+        disabled={false}
+        text="Create Account"
         style={{ marginBottom: 8 }}
-      >
-        <SolidButtonText>Create Account</SolidButtonText>
-      </SolidButton>
-      <TextButton onPress={goToLogin}>
-        <TextButtonText>Login</TextButtonText>
-      </TextButton>
+      />
+      <TextBtn onPress={goToLogin} text="Login" />
     </AuthLayout>
   );
 }

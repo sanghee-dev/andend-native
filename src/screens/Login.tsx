@@ -1,20 +1,37 @@
 import React, { useEffect, useRef } from "react";
-import { ActivityIndicator } from "react-native";
+import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
-import {
-  SolidButton,
-  SolidButtonText,
-  TextButton,
-  TextButtonText,
-} from "../styles/buttons";
+import SolidBtn from "../components/buttons/SolidBtn";
+import TextBtn from "../components/buttons/TextBtn";
 import { colors } from "../styles/styles";
+import { isLoggedInVar } from "../../apollo";
+
+interface ILoginProps {
+  login: {
+    ok: boolean;
+    error?: string;
+    token?: string;
+  };
+}
+interface IFormProps {
+  username: string;
+  password: string;
+}
+
+const LOGIN_MUTATION = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      ok
+      error
+      token
+    }
+  }
+`;
 
 export default function Login({ navigation }: any) {
-  let loading = false;
-
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, watch } = useForm<IFormProps>();
   const usernameRef = useRef<HTMLDivElement>();
   const passwordRef = useRef<HTMLDivElement>();
 
@@ -22,8 +39,18 @@ export default function Login({ navigation }: any) {
     next?.current?.focus();
   };
   const onValid = (data: any) => {
-    console.log(data);
+    if (!loading) loginMutation({ variables: { ...data } });
   };
+  const onCompleted = (data: ILoginProps) => {
+    const {
+      login: { ok, error, token },
+    } = data;
+    if (ok) isLoggedInVar(true);
+  };
+
+  const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
+    onCompleted,
+  });
 
   const registerObj = { required: true, minLength: 5, maxLength: 20 };
   useEffect(() => {
@@ -57,20 +84,14 @@ export default function Login({ navigation }: any) {
 
       {/* error message */}
 
-      <SolidButton
+      <SolidBtn
         onPress={handleSubmit(onValid)}
-        disabled={false}
+        disabled={!watch("username") || !watch("password")}
+        loading={loading}
+        text="Log in"
         style={{ marginBottom: 8 }}
-      >
-        {loading ? (
-          <ActivityIndicator size="small" color={colors.green} />
-        ) : (
-          <SolidButtonText>Log in</SolidButtonText>
-        )}
-      </SolidButton>
-      <TextButton onPress={goToCreateAccount}>
-        <TextButtonText>Create Account</TextButtonText>
-      </TextButton>
+      />
+      <TextBtn onPress={goToCreateAccount} text="Create Account" />
     </AuthLayout>
   );
 }

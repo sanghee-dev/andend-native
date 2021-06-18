@@ -1,6 +1,16 @@
 import React from "react";
-import { TextButton, FacebookText } from "../../styles/buttons";
+import styled from "styled-components/native";
+import { colors } from "../../styles/styles";
+import { ButtonSharedProps, ButtonTextSharedProps } from "../../styles/buttons";
 import { Ionicons } from "@expo/vector-icons";
+
+const TextButton = styled.TouchableOpacity`
+  ${ButtonSharedProps};
+`;
+const FacebookText = styled.Text`
+  ${ButtonTextSharedProps};
+  color: ${colors.facebookColor};
+`;
 
 export default function FacebookBtn() {
   const goToFacebookLogin = () => {};

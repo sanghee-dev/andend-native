@@ -1,14 +1,9 @@
 import React, { useEffect, useRef } from "react";
-import { ActivityIndicator } from "react-native";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
-import {
-  SolidButton,
-  SolidButtonText,
-  TextButton,
-  TextButtonText,
-} from "../styles/buttons";
+import SolidBtn from "../components/buttons/SolidBtn";
+import TextBtn from "../components/buttons/TextBtn";
 import { colors } from "../styles/styles";
 
 export default function CreateAccount({ navigation }: any) {
@@ -90,16 +85,14 @@ export default function CreateAccount({ navigation }: any) {
 
       {/* error message */}
 
-      <SolidButton onPress={handleSubmit(onValid)} disabled={false}>
-        {loading ? (
-          <ActivityIndicator size="small" color={colors.green} />
-        ) : (
-          <SolidButtonText>Create Account</SolidButtonText>
-        )}
-      </SolidButton>
-      <TextButton onPress={goToLogin}>
-        <TextButtonText>Login</TextButtonText>
-      </TextButton>
+      <SolidBtn
+        onPress={handleSubmit(onValid)}
+        disabled={false}
+        loading={loading}
+        text="Create Account"
+        style={{ marginBottom: 8 }}
+      />
+      <TextBtn onPress={goToLogin} text="Login" />
     </AuthLayout>
   );
 }
