@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { gql, useMutation } from "@apollo/client";
+import { isLoggedInVar } from "../../apollo";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
 import SolidBtn from "../components/buttons/SolidBtn";
 import TextBtn from "../components/buttons/TextBtn";
 import { colors } from "../styles/styles";
-import { isLoggedInVar } from "../../apollo";
 
 interface ILoginProps {
   login: {
@@ -30,10 +30,12 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-export default function Login({ navigation }: any) {
-  const { register, handleSubmit, setValue, watch } = useForm<IFormProps>();
+export default function Login({ navigation, route: { params } }: any) {
   const usernameRef = useRef<HTMLDivElement>();
   const passwordRef = useRef<HTMLDivElement>();
+  const { register, handleSubmit, setValue, watch } = useForm<IFormProps>({
+    defaultValues: { username: params?.username, password: params?.password },
+  });
 
   const onFocusNext = (next: any) => {
     next?.current?.focus();
@@ -66,6 +68,7 @@ export default function Login({ navigation }: any) {
         ref={usernameRef}
         onChangeText={(text) => setValue("username", text)}
         onSubmitEditing={() => onFocusNext(passwordRef)}
+        value={watch("username")}
         placeholder="Username"
         placeholderTextColor={colors.grayDark}
         returnKeyType="next"
@@ -75,6 +78,7 @@ export default function Login({ navigation }: any) {
         ref={passwordRef}
         onChangeText={(text) => setValue("password", text)}
         onSubmitEditing={handleSubmit(onValid)}
+        value={watch("password")}
         placeholder="Password"
         placeholderTextColor={colors.grayDark}
         secureTextEntry={true}

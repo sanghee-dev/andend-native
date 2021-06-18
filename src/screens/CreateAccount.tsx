@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import { gql, useMutation } from "@apollo/client";
+import { isLoggedInVar } from "../../apollo";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
@@ -6,23 +8,71 @@ import SolidBtn from "../components/buttons/SolidBtn";
 import TextBtn from "../components/buttons/TextBtn";
 import { colors } from "../styles/styles";
 
+interface ICreateAccountProps {
+  createAccount: {
+    ok: boolean;
+    error?: string;
+  };
+}
+interface IFormProps {
+  firstName: string;
+  lastName?: string;
+  username: string;
+  email: string;
+  password: string;
+}
+
+const CREATE_ACCOUNT_MUTATION = gql`
+  mutation createAccount(
+    $firstName: String!
+    $lastName: String
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    createAccount(
+      firstName: $firstName
+      lastName: $lastName
+      username: $username
+      email: $email
+      password: $password
+    ) {
+      ok
+      error
+    }
+  }
+`;
+
 export default function CreateAccount({ navigation }: any) {
-  let loading = false;
-
-  const { register, handleSubmit, setValue } = useForm();
-
   const firstNameRef = useRef<HTMLDivElement>();
   const lastNameRef = useRef<HTMLDivElement>();
   const usernameRef = useRef<HTMLDivElement>();
   const emailRef = useRef<HTMLDivElement>();
   const passwordRef = useRef<HTMLDivElement>();
 
+  const { register, handleSubmit, getValues, setValue, watch } =
+    useForm<IFormProps>();
+
   const onFocusNext = (next: any) => {
     next?.current?.focus();
   };
   const onValid = (data: any) => {
-    console.log(data);
+    if (!loading) createAccountMutation({ variables: { ...data } });
   };
+  const onCompleted = (data: ICreateAccountProps) => {
+    const {
+      createAccount: { ok, error },
+    } = data;
+    const { username, password } = getValues();
+    if (ok) navigation.navigate("Login", { username, password });
+  };
+
+  const [createAccountMutation, { loading }] = useMutation(
+    CREATE_ACCOUNT_MUTATION,
+    {
+      onCompleted,
+    }
+  );
 
   const registerObj = { required: true, minLength: 5, maxLength: 20 };
   useEffect(() => {
@@ -87,7 +137,13 @@ export default function CreateAccount({ navigation }: any) {
 
       <SolidBtn
         onPress={handleSubmit(onValid)}
-        disabled={false}
+        disabled={
+          !watch("firstName") ||
+          !watch("lastName") ||
+          !watch("username") ||
+          !watch("email") ||
+          !watch("password")
+        }
         loading={loading}
         text="Create Account"
         style={{ marginBottom: 8 }}
