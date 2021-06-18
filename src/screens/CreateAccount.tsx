@@ -68,6 +68,7 @@ export default function CreateAccount({ navigation }: any) {
         placeholderTextColor={colors.grayDark}
         secureTextEntry={true}
         returnKeyType="done"
+        style={{ marginBottom: 8 }}
       />
 
       <ButtonContainer>

@@ -9,10 +9,10 @@ import { colors } from "../styles/styles";
 
 const View = styled.View`
   align-items: center;
-  margin-top: 160px;
+  margin-top: 40px;
 `;
 const Logo = styled.Image`
-  max-width: 250px;
+  max-width: 160px;
 `;
 
 const Stack = createStackNavigator();

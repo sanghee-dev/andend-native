@@ -4,8 +4,6 @@ import { colors, fonts, spaces } from "./styles";
 export const ButtonContainer = styled.View`
   width: 100%;
   align-items: center;
-  position: absolute;
-  bottom: 32px;
 `;
 
 const ButtonSharedProps = `
