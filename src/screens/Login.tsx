@@ -6,6 +6,7 @@ import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
 import SolidBtn from "../components/buttons/SolidBtn";
 import TextBtn from "../components/buttons/TextBtn";
+import LoginBtn from "../components/buttons/LoginBtn";
 import { colors } from "../styles/styles";
 
 interface ILoginProps {
@@ -93,6 +94,12 @@ export default function Login({ navigation, route: { params } }: any) {
         disabled={!watch("username") || !watch("password")}
         loading={loading}
         text="Log in"
+        style={{ marginBottom: 8 }}
+      />
+      <LoginBtn
+        onPress={handleSubmit(onValid)}
+        disabled={!watch("username") || !watch("password")}
+        loading={loading}
         style={{ marginBottom: 8 }}
       />
       <TextBtn onPress={goToCreateAccount} text="Create Account" />
