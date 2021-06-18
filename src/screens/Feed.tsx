@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
+import LogOutBtn from "../components/buttons/LogOutBtn";
 
 const View = styled.View`
   flex: 1;
@@ -11,6 +12,7 @@ const Text = styled.Text``;
 export default function Feed() {
   return (
     <View>
+      <LogOutBtn />
       <Text>Feed</Text>
     </View>
   );
