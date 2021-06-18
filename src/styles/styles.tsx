@@ -20,10 +20,11 @@ export const fonts = {
 
 // space
 const spaceUnit = 16;
-const ratio = 1.5;
+const spaceRatio = 1.5;
 export const spaces = {
+  unit: spaceUnit,
   margin: `${spaceUnit}px`,
-  marginTopBottom: `${spaceUnit}px ${spaceUnit * ratio}px`,
+  marginTopBottom: `${spaceUnit}px ${spaceUnit * spaceRatio}px`,
   padding: `${spaceUnit}px`,
-  paddingTopBottom: `${spaceUnit}px ${spaceUnit * ratio}px`,
+  paddingTopBottom: `${spaceUnit}px ${spaceUnit * spaceRatio}px`,
 };

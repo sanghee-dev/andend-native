@@ -17,8 +17,7 @@ const KeyboardAvoidingView = styled.KeyboardAvoidingView`
   justify-content: center;
   align-items: center;
 `;
-
-export const Logo = styled.Image`
+const Logo = styled.Image`
   max-width: 50%;
   width: 100%; /*  for web */
   margin-top: 80px;
@@ -34,7 +33,7 @@ export default function AuthLayout({ children }: any) {
       <Container>
         <KeyboardAvoidingView
           behavior="padding"
-          keyboardVerticalOffset={Platform.OS === "ios" ? 20 : 50}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 30 : 40}
         >
           {children}
         </KeyboardAvoidingView>

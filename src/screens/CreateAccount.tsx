@@ -34,7 +34,6 @@ export default function CreateAccount({ navigation }: any) {
         placeholder="First Name"
         placeholderTextColor={colors.grayDark}
         returnKeyType="next"
-        style={{ marginBottom: 8 }}
       />
       <AuthTextInput
         ref={lastNameRef}
@@ -42,7 +41,6 @@ export default function CreateAccount({ navigation }: any) {
         placeholder="Last Name"
         placeholderTextColor={colors.grayDark}
         returnKeyType="next"
-        style={{ marginBottom: 8 }}
       />
       <AuthTextInput
         ref={usernameRef}
@@ -50,7 +48,6 @@ export default function CreateAccount({ navigation }: any) {
         placeholder="Username"
         placeholderTextColor={colors.grayDark}
         returnKeyType="next"
-        style={{ marginBottom: 8 }}
       />
       <AuthTextInput
         ref={emailRef}
@@ -59,7 +56,6 @@ export default function CreateAccount({ navigation }: any) {
         placeholderTextColor={colors.grayDark}
         keyboardType="email-address"
         returnKeyType="next"
-        style={{ marginBottom: 8 }}
       />
       <AuthTextInput
         ref={passwordRef}
@@ -68,7 +64,7 @@ export default function CreateAccount({ navigation }: any) {
         placeholderTextColor={colors.grayDark}
         secureTextEntry={true}
         returnKeyType="done"
-        style={{ marginBottom: 8 }}
+        lastChild={true}
       />
 
       <ButtonContainer>
