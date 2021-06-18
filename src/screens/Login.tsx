@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { ActivityIndicator } from "react-native";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
 import { AuthTextInput } from "../styles/inputs";
@@ -11,7 +12,7 @@ import {
 import { colors } from "../styles/styles";
 
 export default function Login({ navigation }: any) {
-  const goToCreateAccount = () => navigation.navigate("CreateAccount");
+  let loading = false;
 
   const { register, handleSubmit, setValue } = useForm();
   const usernameRef = useRef<HTMLDivElement>();
@@ -24,10 +25,13 @@ export default function Login({ navigation }: any) {
     console.log(data);
   };
 
+  const registerObj = { required: true, minLength: 5, maxLength: 20 };
   useEffect(() => {
-    register("username");
-    register("password");
+    register("username", registerObj);
+    register("password", registerObj);
   }, [register]);
+
+  const goToCreateAccount = () => navigation.navigate("CreateAccount");
 
   return (
     <AuthLayout>
@@ -51,12 +55,18 @@ export default function Login({ navigation }: any) {
         lastChild={true}
       />
 
+      {/* error message */}
+
       <SolidButton
         onPress={handleSubmit(onValid)}
         disabled={false}
         style={{ marginBottom: 8 }}
       >
-        <SolidButtonText>Log in</SolidButtonText>
+        {loading ? (
+          <ActivityIndicator size="small" color={colors.green} />
+        ) : (
+          <SolidButtonText>Log in</SolidButtonText>
+        )}
       </SolidButton>
       <TextButton onPress={goToCreateAccount}>
         <TextButtonText>Create Account</TextButtonText>
