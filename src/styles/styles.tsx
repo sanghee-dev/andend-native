@@ -2,6 +2,7 @@
 export const colors = {
   blue: "rgb(0,149,246)",
   orange: "#ffae00",
+  green: "#00c97c",
   red: "rgb(240,73,86)",
   gray: "rgb(220,220,220)",
   grayLight: "rgb(252,252,252)",

@@ -22,7 +22,7 @@ const ButtonTextSharedProps = `
 
 export const BlueButton = styled.TouchableOpacity`
   ${ButtonSharedProps};
-  background-color: ${colors.orange};
+  background-color: ${colors.green};
 `;
 export const BlueButtonText = styled.Text`
   ${ButtonTextSharedProps};
@@ -34,7 +34,7 @@ export const TextButton = styled.TouchableOpacity`
 `;
 export const TextButtonText = styled.Text`
   ${ButtonTextSharedProps};
-  color: ${colors.orange};
+  color: ${colors.green};
 `;
 export const FacebookText = styled.Text`
   ${ButtonTextSharedProps};

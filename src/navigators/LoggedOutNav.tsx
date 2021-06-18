@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 import Welcome from "../screens/Welcome";
 import Login from "../screens/Login";
 import CreateAccount from "../screens/CreateAccount";
+import { colors } from "../styles/styles";
 
 const View = styled.View`
   align-items: center;
@@ -31,7 +32,7 @@ export default function LoggedOutNav() {
             </View>
           ),
           headerTransparent: true,
-          headerTintColor: "rgb(0,149,246)",
+          headerTintColor: `${colors.grayDark}`,
         }}
       >
         <Stack.Screen name="Welcome" component={Welcome} />

@@ -6,7 +6,7 @@ export const AuthTextInput = styled.TextInput`
   align-items: center;
   padding: 14px;
   border-radius: 4;
-  border: 1px solid ${colors.gray};
+  border: 0.5px solid ${colors.gray};
   background-color: ${colors.grayLight};
   font-size: ${fonts.text};
 `;
