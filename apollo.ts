@@ -6,8 +6,8 @@ export const tokenVar = makeVar<string>("");
 
 export const logUserIn = async (token: string | undefined) => {
   await AsyncStorage.multiSet([
-    ["token", JSON.stringify(token)],
-    ["loggedIn", JSON.stringify("true")],
+    ["token", token],
+    ["loggedIn", "yes"],
   ]);
   isLoggedInVar(true);
   tokenVar(token);
