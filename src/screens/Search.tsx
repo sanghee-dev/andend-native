@@ -8,10 +8,10 @@ const View = styled.View`
 `;
 const Text = styled.Text``;
 
-export default function Feed() {
+export default function Search() {
   return (
     <View>
-      <Text>Feed</Text>
+      <Text>Search</Text>
     </View>
   );
 }
