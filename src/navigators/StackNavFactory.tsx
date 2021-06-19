@@ -1,17 +1,27 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Feed from "../../screens/Feed";
-import Search from "../../screens/Search";
-import Photo from "../../screens/Photo";
-import Notifications from "../../screens/Notifications";
-import Me from "../../screens/Me";
-import Profile from "../../screens/Profile";
+import Feed from "../screens/Feed";
+import Search from "../screens/Search";
+import Photo from "../screens/Photo";
+import Notifications from "../screens/Notifications";
+import Me from "../screens/Me";
+import Profile from "../screens/Profile";
+import { colors } from "../styles/styles";
 
 const Stack = createStackNavigator();
 
 export default function StackNavFactory({ screenName }: any) {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: colors.black,
+        headerStyle: {
+          shadowColor: colors.gray,
+          backgroundColor: colors.white,
+        },
+        headerBackTitleVisible: false,
+      }}
+    >
       {screenName === "Feed" ? (
         <Stack.Screen name={"Feed"} component={Feed} />
       ) : null}

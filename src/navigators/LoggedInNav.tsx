@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import StackNavFactory from "../components/nav/StackNavFactory";
+import StackNavFactory from "./StackNavFactory";
 import { View } from "react-native";
 import TabIcon from "../components/nav/TabIcon";
 import { colors } from "../styles/styles";
@@ -13,7 +13,10 @@ export default function LoggedInNav() {
       tabBarOptions={{
         activeTintColor: colors.black,
         showLabel: false,
-        style: {},
+        style: {
+          borderTopColor: colors.gray,
+          backgroundColor: colors.white,
+        },
       }}
     >
       <Tabs.Screen

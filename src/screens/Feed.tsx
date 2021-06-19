@@ -7,11 +7,17 @@ const View = styled.View`
   align-items: center;
 `;
 const Text = styled.Text``;
+const TouchableOpacity = styled.TouchableOpacity`
+  background-color: yellow;
+`;
 
-export default function Feed() {
+export default function Feed({ navigation }: any) {
   return (
     <View>
       <Text>Feed</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
+        <Text>Go to photo</Text>
+      </TouchableOpacity>
     </View>
   );
 }
