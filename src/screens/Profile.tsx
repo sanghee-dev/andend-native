@@ -12,8 +12,8 @@ const Text = styled.Text``;
 export default function Profile() {
   return (
     <View>
-      <LogOutBtn />
       <Text>Profile</Text>
+      <LogOutBtn />
     </View>
   );
 }
