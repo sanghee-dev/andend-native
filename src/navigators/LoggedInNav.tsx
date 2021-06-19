@@ -7,6 +7,7 @@ import Search from "../screens/Search";
 import Notifications from "../screens/Notifications";
 import Profile from "../screens/Profile";
 import { colors } from "../styles/styles";
+import TabIcon from "../components/nav/TabIcon";
 
 const Tabs = createBottomTabNavigator();
 
@@ -27,7 +28,7 @@ export default function LoggedInNav() {
           component={Feed}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons name="home" color={color} size={size} />
+              <TabIcon iconName="home" color={color} focused={focused} />
             ),
           }}
         />
@@ -36,7 +37,7 @@ export default function LoggedInNav() {
           component={Search}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons name="search" color={color} size={size} />
+              <TabIcon iconName="search" color={color} focused={focused} />
             ),
           }}
         />
@@ -45,7 +46,7 @@ export default function LoggedInNav() {
           component={Notifications}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons name="heart" color={color} size={size} />
+              <TabIcon iconName="heart" color={color} focused={focused} />
             ),
           }}
         />
@@ -54,7 +55,7 @@ export default function LoggedInNav() {
           component={Profile}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons name="person" color={color} size={size} />
+              <TabIcon iconName="person" color={color} focused={focused} />
             ),
           }}
         />
