@@ -27,11 +27,7 @@ export default function LoggedInNav() {
           component={Feed}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons
-                name={focused ? "home" : "home-outline"}
-                color={color}
-                size={size}
-              />
+              <Ionicons name="home" color={color} size={size} />
             ),
           }}
         />
@@ -40,11 +36,7 @@ export default function LoggedInNav() {
           component={Search}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons
-                name={focused ? "search" : "search-outline"}
-                color={color}
-                size={size}
-              />
+              <Ionicons name="search" color={color} size={size} />
             ),
           }}
         />
@@ -53,11 +45,7 @@ export default function LoggedInNav() {
           component={Notifications}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons
-                name={focused ? "heart" : "heart-outline"}
-                color={color}
-                size={size}
-              />
+              <Ionicons name="heart" color={color} size={size} />
             ),
           }}
         />
@@ -66,11 +54,7 @@ export default function LoggedInNav() {
           component={Profile}
           options={{
             tabBarIcon: ({ focused, color, size }) => (
-              <Ionicons
-                name={focused ? "person" : "person-outline"}
-                color={color}
-                size={size}
-              />
+              <Ionicons name="person" color={color} size={size} />
             ),
           }}
         />
