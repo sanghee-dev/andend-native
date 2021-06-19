@@ -15,7 +15,7 @@ export default function LoggedInNav() {
     <NavigationContainer>
       <Tabs.Navigator
         tabBarOptions={{
-          activeTintColor: colors.green,
+          activeTintColor: colors.main,
           showLabel: false,
           style: {
             borderTopColor: colors.gray,

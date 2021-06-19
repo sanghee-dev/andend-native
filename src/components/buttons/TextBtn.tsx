@@ -14,7 +14,7 @@ const TextButton = styled.TouchableOpacity`
 `;
 const TextButtonText = styled.Text`
   ${ButtonTextSharedProps};
-  color: ${colors.green};
+  color: ${colors.main};
 `;
 
 export default function SolidBtn({ onPress, text }: IProps) {

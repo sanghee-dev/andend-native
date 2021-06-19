@@ -6,7 +6,7 @@ import { ButtonSharedProps, ButtonTextSharedProps } from "../../styles/buttons";
 
 const SolidButton = styled.TouchableOpacity`
   ${ButtonSharedProps};
-  background-color: ${colors.green};
+  background-color: ${colors.main};
 `;
 const SolidButtonText = styled.Text`
   ${ButtonTextSharedProps};

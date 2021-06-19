@@ -14,7 +14,7 @@ interface IProps {
 
 const SolidButton = styled.TouchableOpacity`
   ${ButtonSharedProps};
-  background-color: ${colors.green};
+  background-color: ${colors.main};
   opacity: ${(props: any) => (props.disabled ? 0.5 : 1)};
 `;
 const SolidButtonText = styled.Text`
