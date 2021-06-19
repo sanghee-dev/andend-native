@@ -7,12 +7,14 @@ import Notifications from "../screens/Notifications";
 import Me from "../screens/Me";
 import Profile from "../screens/Profile";
 import { colors } from "../styles/styles";
+import { Image } from "react-native";
 
 const Stack = createStackNavigator();
 
-export default function StackNavFactory({ screenName }: any) {
+export default function SharedStackNav({ screenName }: any) {
   return (
     <Stack.Navigator
+      headerMode="screen"
       screenOptions={{
         headerTintColor: colors.black,
         headerStyle: {
@@ -23,7 +25,21 @@ export default function StackNavFactory({ screenName }: any) {
       }}
     >
       {screenName === "Feed" ? (
-        <Stack.Screen name={"Feed"} component={Feed} />
+        <Stack.Screen
+          name={"Feed"}
+          component={Feed}
+          options={{
+            headerTitle: () => (
+              <Image
+                style={{
+                  maxHeight: 20,
+                }}
+                resizeMode="contain"
+                source={require("../../assets/logo.png")}
+              />
+            ),
+          }}
+        />
       ) : null}
       {screenName === "Search" ? (
         <Stack.Screen name={"Search"} component={Search} />
