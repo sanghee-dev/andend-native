@@ -16,6 +16,7 @@ export default function LoggedInNav() {
         style: {
           borderTopColor: colors.gray,
           backgroundColor: colors.white,
+          height: 50,
         },
       }}
     >

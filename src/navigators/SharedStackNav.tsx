@@ -20,6 +20,7 @@ export default function SharedStackNav({ screenName }: any) {
         headerStyle: {
           shadowColor: colors.gray,
           backgroundColor: colors.white,
+          height: 70,
         },
         headerBackTitleVisible: false,
       }}
