@@ -21,7 +21,7 @@ export const fonts = {
 };
 
 // space
-const spaceUnit = 16;
+const spaceUnit = 12;
 const spaceRatio = 1.5;
 export const spaces = {
   unit: spaceUnit,

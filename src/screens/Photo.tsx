@@ -11,12 +11,12 @@ const TouchableOpacity = styled.TouchableOpacity`
   background-color: yellow;
 `;
 
-export default function Search({ navigation }: any) {
+export default function Photo({ navigation }: any) {
   return (
     <View>
-      <Text>Search</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
-        <Text>Go to photo</Text>
+      <Text>Photo</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <Text>Go to profile</Text>
       </TouchableOpacity>
     </View>
   );

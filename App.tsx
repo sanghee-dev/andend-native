@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
 import client, { isLoggedInVar, tokenVar } from "./apollo";
+import { NavigationContainer } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
@@ -41,7 +42,9 @@ export default function App() {
   ) : (
     <ApolloProvider client={client}>
       <AppearanceProvider>
-        {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
+        <NavigationContainer>
+          {isLoggedIn ? <LoggedInNav /> : <LoggedOutNav />}
+        </NavigationContainer>
       </AppearanceProvider>
     </ApolloProvider>
   );
