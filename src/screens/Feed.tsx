@@ -1,17 +1,15 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
-import styled from "styled-components/native";
 import { seeFeed, seeFeedVariables } from "../__generated__/seeFeed";
 import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from "../../fragments";
+import styled from "styled-components/native";
+import ScreenLayout from "../components/ScreenLayout";
 
-const View = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-`;
+const FlatList = styled.FlatList``;
+const View = styled.View``;
 const Text = styled.Text``;
 const TouchableOpacity = styled.TouchableOpacity`
-  background-color: yellow;
+  background-color: white;
 `;
 
 const SEE_FEED_QUERY = gql`
@@ -40,17 +38,37 @@ const SEE_FEED_QUERY = gql`
 
 export default function Feed({ navigation }: any) {
   const [page, setPage] = useState(1);
-  const { data } = useQuery<seeFeed, seeFeedVariables>(SEE_FEED_QUERY, {
-    variables: { page },
-  });
-  console.log(data);
+  const { data, loading } = useQuery<seeFeed, seeFeedVariables>(
+    SEE_FEED_QUERY,
+    {
+      variables: { page },
+    }
+  );
+  console.log(data?.seeFeed?.photos);
+
+  const renderItem = ({ item }) => {
+    return (
+      <View>
+        <Text>{item.user.avatar}</Text>
+        <Text>{item.user.username}</Text>
+        <Text>{item.id}</Text>
+        <Text>{item.file}</Text>
+        <Text>{item.caption}</Text>
+      </View>
+    );
+  };
 
   return (
-    <View>
-      <Text>Feed</Text>
+    <ScreenLayout loading={loading}>
+      <FlatList
+        data={data?.seeFeed?.photos}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
+
       <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
         <Text>Go to photo</Text>
       </TouchableOpacity>
-    </View>
+    </ScreenLayout>
   );
 }
