@@ -14,8 +14,7 @@ const TouchableOpacity = styled.TouchableOpacity`
 export default function Search({ navigation }: any) {
   return (
     <View>
-      <Text>Search</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
         <Text>Go to photo</Text>
       </TouchableOpacity>
     </View>

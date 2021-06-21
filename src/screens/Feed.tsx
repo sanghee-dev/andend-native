@@ -8,9 +8,11 @@ import {
 } from "../../fragments";
 import styled from "styled-components/native";
 import ScreenLayout from "../components/ScreenLayout";
+import FeedUnit from "../components/FeedUnit";
 
-const FlatList = styled.FlatList``;
-const View = styled.View``;
+const FlatList = styled.FlatList`
+  width: 100%;
+`;
 const Text = styled.Text``;
 const TouchableOpacity = styled.TouchableOpacity`
   background-color: white;
@@ -26,8 +28,8 @@ const SEE_FEED_QUERY = gql`
         user {
           ...UserFragment
         }
-        likeNumber
         isLiked
+        likeNumber
         commentNumber
         comments {
           ...CommentFragment
@@ -49,24 +51,14 @@ export default function Feed({ navigation }: any) {
     }
   );
 
-  const renderItem = ({ item }) => {
-    return (
-      <View>
-        <Text>{item.user.avatar}</Text>
-        <Text>{item.user.username}</Text>
-        <Text>{item.id}</Text>
-        <Text>{item.file}</Text>
-        <Text>{item.caption}</Text>
-      </View>
-    );
-  };
+  const renderItem = ({ item }: any) => <FeedUnit {...item} />;
 
   return (
     <ScreenLayout loading={loading}>
       <FlatList
         data={data?.seeFeed?.photos}
         renderItem={renderItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: any) => "" + item.id}
       />
 
       <TouchableOpacity onPress={() => navigation.navigate("Photo")}>

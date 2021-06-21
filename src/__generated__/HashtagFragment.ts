@@ -4,14 +4,13 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL fragment: PhotoFragment
+// GraphQL fragment: HashtagFragment
 // ====================================================
 
-export interface PhotoFragment {
-  __typename: "Photo";
+export interface HashtagFragment {
+  __typename: "Hashtag";
   id: number;
   createdAt: string;
   updatedAt: string;
-  file: string;
-  caption: string | null;
+  hashtag: string;
 }

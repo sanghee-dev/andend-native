@@ -7,12 +7,10 @@ const View = styled.View`
   justify-content: center;
   align-items: center;
 `;
-const Text = styled.Text``;
 
 export default function Me() {
   return (
     <View>
-      <Text>Me</Text>
       <LogOutBtn />
     </View>
   );

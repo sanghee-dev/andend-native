@@ -14,7 +14,6 @@ const TouchableOpacity = styled.TouchableOpacity`
 export default function Camera({ navigation }: any) {
   return (
     <View>
-      <Text>Camera</Text>
       <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
         <Text>Go to profile</Text>
       </TouchableOpacity>

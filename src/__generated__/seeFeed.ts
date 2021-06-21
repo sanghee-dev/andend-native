@@ -9,6 +9,7 @@
 
 export interface seeFeed_seeFeed_photos_user {
   __typename: "User";
+  id: number;
   username: string;
   avatar: string | null;
 }
@@ -23,6 +24,7 @@ export interface seeFeed_seeFeed_photos_comments {
   __typename: "Comment";
   id: number;
   createdAt: string;
+  updatedAt: string;
   user: seeFeed_seeFeed_photos_comments_user;
   payload: string;
   isMine: boolean;
@@ -31,15 +33,15 @@ export interface seeFeed_seeFeed_photos_comments {
 export interface seeFeed_seeFeed_photos {
   __typename: "Photo";
   id: number;
-  file: string;
-  likes: number;
-  commentNumber: number;
-  isLiked: boolean;
-  user: seeFeed_seeFeed_photos_user;
-  caption: string | null;
-  comments: (seeFeed_seeFeed_photos_comments | null)[] | null;
   createdAt: string;
-  isMine: boolean;
+  updatedAt: string;
+  file: string;
+  caption: string | null;
+  user: seeFeed_seeFeed_photos_user;
+  likeNumber: number;
+  isLiked: boolean;
+  commentNumber: number;
+  comments: (seeFeed_seeFeed_photos_comments | null)[] | null;
 }
 
 export interface seeFeed_seeFeed {
