@@ -1,21 +1,21 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import AuthLayout from "../components/auth/AuthLayout";
 import SolidBtn from "../components/buttons/SolidBtn";
 import TextBtn from "../components/buttons/TextBtn";
 
-export default function Welcome({ navigation }: any) {
-  const goToCreateAccount = () => navigation.navigate("CreateAccount");
-  const goToLogin = () => navigation.navigate("Login");
+export default function Welcome() {
+  const navigation = useNavigation();
 
   return (
     <AuthLayout>
       <SolidBtn
-        onPress={goToCreateAccount}
+        onPress={() => navigation.navigate("CreateAccount")}
         disabled={false}
         text="Create Account"
         style={{ marginBottom: 8 }}
       />
-      <TextBtn onPress={goToLogin} text="Login" />
+      <TextBtn onPress={() => navigation.navigate("Login")} text="Login" />
     </AuthLayout>
   );
 }

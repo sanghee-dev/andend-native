@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { gql, useMutation } from "@apollo/client";
 import { logUserIn } from "../../apollo";
 import { useForm } from "react-hook-form";
@@ -30,7 +31,8 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-export default function Login({ navigation, route: { params } }: any) {
+export default function Login({ route: { params } }: any) {
+  const navigation = useNavigation();
   const usernameRef = useRef<HTMLDivElement>();
   const passwordRef = useRef<HTMLDivElement>();
   const { register, handleSubmit, setValue, watch } = useForm<IFormProps>({

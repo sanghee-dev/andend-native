@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { gql, useQuery } from "@apollo/client";
 import { seeFeed, seeFeedVariables } from "../__generated__/seeFeed";
 import {
@@ -42,7 +43,8 @@ const SEE_FEED_QUERY = gql`
   ${COMMENT_FRAGMENT}
 `;
 
-export default function Feed({ navigation }: any) {
+export default function Feed() {
+  const navigation = useNavigation();
   const [page, setPage] = useState(1);
   const { data, loading } = useQuery<seeFeed, seeFeedVariables>(
     SEE_FEED_QUERY,

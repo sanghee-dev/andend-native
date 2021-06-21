@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../components/auth/AuthLayout";
@@ -42,7 +43,8 @@ const CREATE_ACCOUNT_MUTATION = gql`
   }
 `;
 
-export default function CreateAccount({ navigation }: any) {
+export default function CreateAccount() {
+  const navigation = useNavigation();
   const firstNameRef = useRef<HTMLDivElement>();
   const lastNameRef = useRef<HTMLDivElement>();
   const usernameRef = useRef<HTMLDivElement>();

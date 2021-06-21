@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 
 const View = styled.View`
@@ -11,7 +12,9 @@ const TouchableOpacity = styled.TouchableOpacity`
   background-color: white;
 `;
 
-export default function Search({ navigation }: any) {
+export default function Search() {
+  const navigation = useNavigation();
+
   return (
     <View>
       <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
