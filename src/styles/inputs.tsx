@@ -1,5 +1,7 @@
 import styled from "styled-components/native";
-import { colors, fonts, spaces } from "./styles";
+import { colors } from "./colors";
+import { fonts } from "./fonts";
+import { spaces } from "./spaces";
 
 export const AuthTextInput = styled.TextInput`
   width: 90%;

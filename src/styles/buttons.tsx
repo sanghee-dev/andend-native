@@ -1,4 +1,4 @@
-import { spaces } from "./styles";
+import { spaces } from "./spaces";
 
 // Button
 export const ButtonSharedProps = `

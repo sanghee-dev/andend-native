@@ -1,7 +1,7 @@
 import React from "react";
 import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
-import { colors } from "../../styles/styles";
+import { colors } from "../../styles/colors";
 import { ButtonSharedProps, ButtonTextSharedProps } from "../../styles/buttons";
 
 interface IProps {

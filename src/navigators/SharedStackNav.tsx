@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { colors } from "../styles/styles";
+import { colors } from "../styles/colors";
 import { Image } from "react-native";
 import Feed from "../screens/main/Feed";
 import Search from "../screens/main/Search";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { RefreshControl } from "react-native";
 import { gql, useQuery } from "@apollo/client";
 import { seeFeed, seeFeedVariables } from "../../__generated__/seeFeed";
 import {
@@ -8,6 +8,7 @@ import {
   COMMENT_FRAGMENT,
 } from "../../../fragments";
 import styled from "styled-components/native";
+import { colors } from "../../styles/colors";
 import ScreenLayout from "../../components/layouts/ScreenLayout";
 import FeedUnit from "../../components/FeedUnit";
 
@@ -40,21 +41,33 @@ const SEE_FEED_QUERY = gql`
 `;
 
 export default function Feed() {
-  const navigation = useNavigation();
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [page, setPage] = useState(1);
-  const { data, loading } = useQuery<seeFeed, seeFeedVariables>(
+  const { data, loading, refetch } = useQuery<seeFeed, seeFeedVariables>(
     SEE_FEED_QUERY,
-    {
-      variables: { page },
-    }
+    { variables: { page } }
   );
+  const onRefresh = async () => {
+    setIsRefreshing(true);
+    await refetch();
+    setIsRefreshing(false);
+  };
 
   const renderItem = ({ item }: any) => <FeedUnit {...item} />;
 
   return (
     <ScreenLayout loading={loading}>
       <FlatList
+        refreshing={isRefreshing}
+        onRefresh={onRefresh}
         data={data?.seeFeed?.photos}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.main}
+          />
+        }
         renderItem={renderItem}
         keyExtractor={(item: any) => "" + item.id}
       />

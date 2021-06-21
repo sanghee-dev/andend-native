@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SharedStackNav from "./SharedStackNav";
 import { View } from "react-native";
 import TabIcon from "../components/nav/TabIcon";
-import { colors } from "../styles/styles";
+import { colors } from "../styles/colors";
 
 const Tabs = createBottomTabNavigator();
 

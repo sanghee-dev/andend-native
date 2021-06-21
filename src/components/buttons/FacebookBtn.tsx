@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { colors } from "../../styles/styles";
+import { colors } from "../../styles/colors";
 import { ButtonSharedProps, ButtonTextSharedProps } from "../../styles/buttons";
 import { Ionicons } from "@expo/vector-icons";
 

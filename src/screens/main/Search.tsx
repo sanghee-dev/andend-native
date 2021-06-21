@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
-import ScreenLayout from "../components/ScreenLayout";
+import ScreenLayout from "../../components/layouts/ScreenLayout";
 
 const Text = styled.Text``;
 const TouchableOpacity = styled.TouchableOpacity`

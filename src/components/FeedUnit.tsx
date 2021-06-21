@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useWindowDimensions, Image } from "react-native";
 import styled from "styled-components/native";
-import { colors, spaces, borders } from "../styles/styles";
+import { colors } from "../styles/colors";
+import { borders } from "../styles/borders";
+import { spaces } from "../styles/spaces";
 import { Ionicons } from "@expo/vector-icons";
 
 interface IUserProps {

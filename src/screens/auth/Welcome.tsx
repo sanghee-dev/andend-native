@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import AuthLayout from "../components/auth/AuthLayout";
-import SolidBtn from "../components/buttons/SolidBtn";
-import TextBtn from "../components/buttons/TextBtn";
+import AuthLayout from "../../components/layouts/AuthLayout";
+import SolidBtn from "../../components/buttons/SolidBtn";
+import TextBtn from "../../components/buttons/TextBtn";
 
 export default function Welcome() {
   const navigation = useNavigation();

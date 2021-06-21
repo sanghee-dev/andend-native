@@ -6,7 +6,7 @@ import AuthLayout from "../../components/layouts/AuthLayout";
 import { AuthTextInput } from "../../styles/inputs";
 import SolidBtn from "../../components/buttons/SolidBtn";
 import TextBtn from "../../components/buttons/TextBtn";
-import { colors } from "../../styles/styles";
+import { colors } from "../../styles/colors";
 
 interface ICreateAccountProps {
   createAccount: {

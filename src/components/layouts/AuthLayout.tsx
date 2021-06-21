@@ -1,7 +1,7 @@
 import React from "react";
 import { Platform, Keyboard } from "react-native";
 import styled from "styled-components/native";
-import { colors } from "../../styles/styles";
+import { colors } from "../../styles/colors";
 
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
   flex: 1;
