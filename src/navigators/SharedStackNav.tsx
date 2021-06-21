@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Feed from "../screens/Feed";
 import Search from "../screens/Search";
-import Photo from "../screens/Photo";
+import Camera from "../screens/Camera";
 import Notifications from "../screens/Notifications";
 import Me from "../screens/Me";
 import Profile from "../screens/Profile";
@@ -50,7 +50,7 @@ export default function SharedStackNav({ screenName }: any) {
       ) : null}
       {screenName === "Me" ? <Stack.Screen name={"Me"} component={Me} /> : null}
       <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Photo" component={Photo} />
+      <Stack.Screen name="Camera" component={Camera} />
     </Stack.Navigator>
   );
 }
