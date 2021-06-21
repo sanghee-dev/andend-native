@@ -52,6 +52,7 @@ export default function LoggedInNav() {
       <Tabs.Screen
         name="Notifications"
         options={{
+          tabBarBadge: 1,
           tabBarIcon: ({ focused, color, size }) => (
             <TabIcon iconName="heart" color={color} focused={focused} />
           ),

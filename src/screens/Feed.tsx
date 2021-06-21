@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import { seeFeed, seeFeedVariables } from "../__generated__/seeFeed";
-import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from "../../fragments";
+import {
+  USER_FRAGMENT,
+  PHOTO_FRAGMENT,
+  COMMENT_FRAGMENT,
+} from "../../fragments";
 import styled from "styled-components/native";
 import ScreenLayout from "../components/ScreenLayout";
 
@@ -20,18 +24,18 @@ const SEE_FEED_QUERY = gql`
       photos {
         ...PhotoFragment
         user {
-          username
-          avatar
+          ...UserFragment
         }
-        caption
+        likeNumber
+        isLiked
+        commentNumber
         comments {
           ...CommentFragment
         }
-        createdAt
-        isMine
       }
     }
   }
+  ${USER_FRAGMENT}
   ${PHOTO_FRAGMENT}
   ${COMMENT_FRAGMENT}
 `;
@@ -44,7 +48,6 @@ export default function Feed({ navigation }: any) {
       variables: { page },
     }
   );
-  console.log(data?.seeFeed?.photos);
 
   const renderItem = ({ item }) => {
     return (
