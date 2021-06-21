@@ -1,9 +1,9 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import styled from "styled-components/native";
-import Welcome from "../screens/Welcome";
-import Login from "../screens/Login";
-import CreateAccount from "../screens/CreateAccount";
+import Welcome from "../screens/auth/Welcome";
+import Login from "../screens/auth/Login";
+import CreateAccount from "../screens/auth/CreateAccount";
 import { colors } from "../styles/styles";
 
 const View = styled.View`

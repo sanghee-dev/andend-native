@@ -50,14 +50,30 @@ const File = styled.Image`
 
 const Actions = styled.View`
   padding: 0 ${spaces.padding};
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 4px;
 `;
-const Action = styled.TouchableOpacity``;
+const Action = styled.TouchableOpacity`
+  margin-right: 12px;
+`;
 
-const Detail = styled.View`
+const ExtraContainer = styled.View`
   padding: 0 ${spaces.padding};
 `;
-const LikeNumber = styled.TouchableOpacity``;
-const Caption = styled.View``;
+const LikeNumber = styled.TouchableOpacity`
+  margin-bottom: 4px;
+`;
+const LikeNumberText = styled.Text`
+  font-weight: 500;
+`;
+const Caption = styled.View`
+  flex-direction: row;
+`;
+const CaptionUsername = styled.Text`
+  font-weight: 500;
+  margin-right: 4px;
+`;
 const CaptionText = styled.Text``;
 const TouchableOpacity = styled.TouchableOpacity``;
 const Text = styled.Text``;
@@ -110,31 +126,33 @@ export default function FeedUnit({
       />
 
       <Actions>
-        <Action>
+        <Action onPress={() => {}}>
           <Text>
-            {isLiked ? (
-              <Ionicons name="heart" size={28} style={{ color: colors.red }} />
-            ) : (
-              <Ionicons name="heart-outline" size={28} />
-            )}
+            <Ionicons
+              name={isLiked ? "heart" : "heart-outline"}
+              size={28}
+              style={{ color: isLiked ? colors.red : colors.black }}
+            />
           </Text>
         </Action>
-        <Action>
-          <Text>Press Comment</Text>
+        <Action onPress={() => navigation.navigate("Comments")}>
+          <Text>
+            <Ionicons name="chatbubble-outline" size={26} />
+          </Text>
         </Action>
       </Actions>
 
-      <Detail>
-        <LikeNumber>
-          <Text>{likeNumber} likes</Text>
+      <ExtraContainer>
+        <LikeNumber onPress={() => navigation.navigate("Likes")}>
+          <LikeNumberText>{likeNumber} likes</LikeNumberText>
         </LikeNumber>
         <Caption>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            <Username>{user.username}</Username>
+            <CaptionUsername>{user.username}</CaptionUsername>
           </TouchableOpacity>
           <CaptionText>{caption}</CaptionText>
         </Caption>
-      </Detail>
+      </ExtraContainer>
     </Container>
   );
 }

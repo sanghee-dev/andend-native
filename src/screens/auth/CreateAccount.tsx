@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { gql, useMutation } from "@apollo/client";
 import { useForm } from "react-hook-form";
-import AuthLayout from "../components/auth/AuthLayout";
-import { AuthTextInput } from "../styles/inputs";
-import SolidBtn from "../components/buttons/SolidBtn";
-import TextBtn from "../components/buttons/TextBtn";
-import { colors } from "../styles/styles";
+import AuthLayout from "../../components/layouts/AuthLayout";
+import { AuthTextInput } from "../../styles/inputs";
+import SolidBtn from "../../components/buttons/SolidBtn";
+import TextBtn from "../../components/buttons/TextBtn";
+import { colors } from "../../styles/styles";
 
 interface ICreateAccountProps {
   createAccount: {
