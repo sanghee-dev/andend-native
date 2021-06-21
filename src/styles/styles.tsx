@@ -1,7 +1,6 @@
 // colors
 export const colors = {
   main: "#00c97c",
-
   blue: "rgb(0,149,246)",
   orange: "#ffae00",
   green: "#00c97c",
@@ -29,4 +28,9 @@ export const spaces = {
   marginTopBottom: `${spaceUnit}px ${spaceUnit * spaceRatio}px`,
   padding: `${spaceUnit}px`,
   paddingTopBottom: `${spaceUnit}px ${spaceUnit * spaceRatio}px`,
+};
+
+const borderUnit = 0.5;
+export const borders = {
+  border: `${borderUnit}px solid ${colors.gray}`,
 };

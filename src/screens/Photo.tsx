@@ -8,10 +8,10 @@ const View = styled.View`
 `;
 const Text = styled.Text``;
 const TouchableOpacity = styled.TouchableOpacity`
-  background-color: yellow;
+  background-color: white;
 `;
 
-export default function Camera({ navigation }: any) {
+export default function Photo({ navigation }: any) {
   return (
     <View>
       <TouchableOpacity onPress={() => navigation.navigate("Profile")}>

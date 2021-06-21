@@ -8,13 +8,13 @@ const View = styled.View`
 `;
 const Text = styled.Text``;
 const TouchableOpacity = styled.TouchableOpacity`
-  background-color: yellow;
+  background-color: white;
 `;
 
 export default function Search({ navigation }: any) {
   return (
     <View>
-      <TouchableOpacity onPress={() => navigation.navigate("Camera")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Photo")}>
         <Text>Go to photo</Text>
       </TouchableOpacity>
     </View>

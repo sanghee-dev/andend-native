@@ -7,6 +7,7 @@ const View = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: ${colors.white};
 `;
 
 export default function ScreenLayout({ children, loading }: any) {
