@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { gql, useQuery } from "@apollo/client";
 import styled from "styled-components/native";
+import { seeFeed, seeFeedVariables } from "../__generated__/seeFeed";
 import { COMMENT_FRAGMENT, PHOTO_FRAGMENT } from "../../fragments";
 
 const View = styled.View`
@@ -14,19 +15,23 @@ const TouchableOpacity = styled.TouchableOpacity`
 `;
 
 const SEE_FEED_QUERY = gql`
-  query seeFeed {
-    seeFeed {
-      ...PhotoFragment
-      user {
-        username
-        avatar
+  query seeFeed($page: Int!) {
+    seeFeed(page: $page) {
+      ok
+      error
+      photos {
+        ...PhotoFragment
+        user {
+          username
+          avatar
+        }
+        caption
+        comments {
+          ...CommentFragment
+        }
+        createdAt
+        isMine
       }
-      caption
-      comments {
-        ...CommentFragment
-      }
-      createdAt
-      isMine
     }
   }
   ${PHOTO_FRAGMENT}
@@ -34,7 +39,10 @@ const SEE_FEED_QUERY = gql`
 `;
 
 export default function Feed({ navigation }: any) {
-  const { data } = useQuery(SEE_FEED_QUERY);
+  const [page, setPage] = useState(1);
+  const { data } = useQuery<seeFeed, seeFeedVariables>(SEE_FEED_QUERY, {
+    variables: { page },
+  });
   console.log(data);
 
   return (
