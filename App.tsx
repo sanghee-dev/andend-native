@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ApolloProvider, useReactiveVar } from "@apollo/client";
-import client, { isLoggedInVar, tokenVar } from "./apollo";
+import client, { isLoggedInVar, tokenVar, cache } from "./apollo";
 import { NavigationContainer } from "@react-navigation/native";
 import AppLoading from "expo-app-loading";
 import { Asset } from "expo-asset";
@@ -10,6 +10,7 @@ import { AppearanceProvider, useColorScheme } from "react-native-appearance";
 import LoggedOutNav from "./src/navigators/LoggedOutNav";
 import LoggedInNav from "./src/navigators/LoggedInNav";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AsyncStorageWrapper, persistCache } from "apollo3-cache-persist";
 
 export default function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -32,6 +33,10 @@ export default function App() {
       isLoggedInVar(true);
       tokenVar(token);
     }
+    await persistCache({
+      cache,
+      storage: new AsyncStorageWrapper(AsyncStorage),
+    });
     return await preloadAssets();
   };
   const onFinish = () => setLoading(false);

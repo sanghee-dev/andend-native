@@ -10,7 +10,22 @@ import {
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import ScreenLayout from "../../components/layouts/ScreenLayout";
-import FeedUnit from "../../components/FeedUnit";
+import Photo from "./Photo";
+
+interface IProps {
+  item: {
+    id: number;
+    user: {
+      id: number;
+      username: string;
+      avatar?: string;
+    };
+    file: string;
+    caption?: boolean;
+    likeNumber: number;
+    isLiked: boolean;
+  };
+}
 
 const FlatList = styled.FlatList`
   width: 100%;
@@ -42,7 +57,7 @@ const SEE_FEED_QUERY = gql`
 
 export default function Feed() {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [offset, setOffset] = useState(0);
+  const [offset, setOffset] = useState<number>(0);
   const { data, loading, refetch, fetchMore } = useQuery<
     seeFeed,
     seeFeedVariables
@@ -53,12 +68,12 @@ export default function Feed() {
     setIsRefreshing(false);
   };
 
-  const renderItem = ({ item }: any) => <FeedUnit {...item} />;
+  const renderItem = ({ item }: IProps) => <Photo {...item} />;
 
   return (
     <ScreenLayout loading={loading}>
       <FlatList
-        onEndReachedThreshold={0.05}
+        onEndReachedThreshold={0.02}
         onEndReached={() =>
           fetchMore({
             variables: {
