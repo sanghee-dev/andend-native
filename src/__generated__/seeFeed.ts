@@ -38,8 +38,8 @@ export interface seeFeed_seeFeed_photos {
   file: string;
   caption: string | null;
   user: seeFeed_seeFeed_photos_user;
-  likeNumber: number;
   isLiked: boolean;
+  likeNumber: number;
   commentNumber: number;
   comments: (seeFeed_seeFeed_photos_comments | null)[] | null;
 }
@@ -56,5 +56,5 @@ export interface seeFeed {
 }
 
 export interface seeFeedVariables {
-  page: number;
+  offset: number;
 }

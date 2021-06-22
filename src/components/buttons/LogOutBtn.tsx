@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import { logUserOut } from "../../../apollo";
@@ -15,8 +14,6 @@ const ButtonText = styled.Text`
 `;
 
 export default function LogOutBtn() {
-  const navigation = useNavigation();
-
   return (
     <Button onPress={logUserOut}>
       <ButtonText>Log out</ButtonText>

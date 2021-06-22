@@ -13,7 +13,11 @@ const View = styled.View`
 export default function ScreenLayout({ children, loading }: any) {
   return (
     <View>
-      {loading ? <ActivityIndicator color={colors.main} /> : <>{children}</>}
+      {loading ? (
+        <ActivityIndicator color={colors.main} size="small" />
+      ) : (
+        <>{children}</>
+      )}
     </View>
   );
 }

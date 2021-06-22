@@ -17,8 +17,8 @@ const FlatList = styled.FlatList`
 `;
 
 const SEE_FEED_QUERY = gql`
-  query seeFeed($page: Int!) {
-    seeFeed(page: $page) {
+  query seeFeed($offset: Int!) {
+    seeFeed(offset: $offset) {
       ok
       error
       photos {
@@ -42,11 +42,11 @@ const SEE_FEED_QUERY = gql`
 
 export default function Feed() {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [page, setPage] = useState(1);
-  const { data, loading, refetch } = useQuery<seeFeed, seeFeedVariables>(
-    SEE_FEED_QUERY,
-    { variables: { page } }
-  );
+  const [offset, setOffset] = useState(0);
+  const { data, loading, refetch, fetchMore } = useQuery<
+    seeFeed,
+    seeFeedVariables
+  >(SEE_FEED_QUERY, { variables: { offset } });
   const onRefresh = async () => {
     setIsRefreshing(true);
     await refetch();
@@ -58,6 +58,14 @@ export default function Feed() {
   return (
     <ScreenLayout loading={loading}>
       <FlatList
+        onEndReachedThreshold={0}
+        onEndReached={() =>
+          fetchMore({
+            variables: {
+              offset: data?.seeFeed?.photos?.length,
+            },
+          })
+        }
         refreshing={isRefreshing}
         onRefresh={onRefresh}
         data={data?.seeFeed?.photos}

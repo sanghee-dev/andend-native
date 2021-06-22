@@ -136,8 +136,6 @@ export default function CreateAccount() {
         lastChild={true}
       />
 
-      {/* error message */}
-
       <SubmitBtn
         onPress={handleSubmit(onValid)}
         disabled={

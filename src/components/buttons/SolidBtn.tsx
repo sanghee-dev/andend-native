@@ -19,7 +19,7 @@ const ButtonText = styled.Text`
   color: ${colors.white};
 `;
 
-export default function SubmitBtn({ onPress, text }: IProps) {
+export default function SolidBtn({ onPress, text }: IProps) {
   return (
     <Button onPress={onPress}>
       <ButtonText>{text}</ButtonText>
