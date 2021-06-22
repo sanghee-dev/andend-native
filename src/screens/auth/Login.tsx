@@ -51,7 +51,6 @@ export default function Login({ route: { params } }: any) {
       login: { ok, error, token },
     } = data;
     if (ok) await logUserIn(token);
-    navigation.navigate("Feed");
   };
 
   const [loginMutation, { loading }] = useMutation<login, loginVariables>(
