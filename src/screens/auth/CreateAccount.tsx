@@ -8,7 +8,7 @@ import {
 import { useForm } from "react-hook-form";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { AuthTextInput } from "../../styles/inputs";
-import SolidBtn from "../../components/buttons/SolidBtn";
+import SubmitBtn from "../../components/buttons/SubmitBtn";
 import TextBtn from "../../components/buttons/TextBtn";
 import { colors } from "../../styles/colors";
 
@@ -138,7 +138,7 @@ export default function CreateAccount() {
 
       {/* error message */}
 
-      <SolidBtn
+      <SubmitBtn
         onPress={handleSubmit(onValid)}
         disabled={
           !watch("firstName") ||

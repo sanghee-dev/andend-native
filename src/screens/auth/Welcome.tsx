@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import AuthLayout from "../../components/layouts/AuthLayout";
-import SolidBtn from "../../components/buttons/SolidBtn";
+import SubmitBtn from "../../components/buttons/SubmitBtn";
 import TextBtn from "../../components/buttons/TextBtn";
 
 export default function Welcome() {
@@ -9,7 +9,7 @@ export default function Welcome() {
 
   return (
     <AuthLayout>
-      <SolidBtn
+      <SubmitBtn
         onPress={() => navigation.navigate("CreateAccount")}
         disabled={false}
         text="Create Account"

@@ -6,7 +6,7 @@ import { login, loginVariables } from "../../__generated__/login";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { AuthTextInput } from "../../styles/inputs";
-import SolidBtn from "../../components/buttons/SolidBtn";
+import SubmitBtn from "../../components/buttons/SubmitBtn";
 import TextBtn from "../../components/buttons/TextBtn";
 import { colors } from "../../styles/colors";
 
@@ -90,7 +90,7 @@ export default function Login({ route: { params } }: any) {
 
       {/* error message */}
 
-      <SolidBtn
+      <SubmitBtn
         onPress={handleSubmit(onValid)}
         disabled={!watch("username") || !watch("password")}
         loading={loading}
