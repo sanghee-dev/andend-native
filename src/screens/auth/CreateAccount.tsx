@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { gql, useMutation } from "@apollo/client";
+import {
+  createAccount,
+  createAccountVariables,
+} from "../../__generated__/createAccount";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { AuthTextInput } from "../../styles/inputs";
@@ -68,12 +72,10 @@ export default function CreateAccount() {
     if (ok) navigation.navigate("Login", { username, password });
   };
 
-  const [createAccountMutation, { loading }] = useMutation(
-    CREATE_ACCOUNT_MUTATION,
-    {
-      onCompleted,
-    }
-  );
+  const [createAccountMutation, { loading }] = useMutation<
+    createAccount,
+    createAccountVariables
+  >(CREATE_ACCOUNT_MUTATION, { onCompleted });
 
   const registerObj = { required: true, minLength: 5, maxLength: 20 };
   useEffect(() => {

@@ -6,30 +6,35 @@ import { ButtonSharedProps, ButtonTextSharedProps } from "../../styles/buttons";
 
 interface IProps {
   onPress: () => any;
-  disabled: boolean;
+  disabled?: boolean;
   loading?: boolean;
   text: string;
   style?: any;
 }
 
-const SolidButton = styled.TouchableOpacity`
+const Button = styled.TouchableOpacity`
   ${ButtonSharedProps};
   background-color: ${colors.main};
   opacity: ${(props: any) => (props.disabled ? 0.5 : 1)};
 `;
-const SolidButtonText = styled.Text`
+const ButtonText = styled.Text`
   ${ButtonTextSharedProps};
   color: ${colors.white};
 `;
 
-export default function SolidBtn({ onPress, disabled, loading, text }: IProps) {
+export default function SubmitBtn({
+  onPress,
+  disabled,
+  loading,
+  text,
+}: IProps) {
   return (
-    <SolidButton onPress={onPress} disabled={disabled}>
+    <Button onPress={onPress} disabled={disabled}>
       {loading ? (
         <ActivityIndicator size="small" color={colors.white} />
       ) : (
-        <SolidButtonText>{text}</SolidButtonText>
+        <ButtonText>{text}</ButtonText>
       )}
-    </SolidButton>
+    </Button>
   );
 }

@@ -3,7 +3,7 @@ module.exports = {
     includes: ["./**/*.{tsx,ts}"],
     tagName: "gql",
     service: {
-      name: "instagram",
+      name: "andend",
       url: "http://localhost:5000/graphql",
     },
   },

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { gql, useMutation } from "@apollo/client";
 import { logUserIn } from "../../../apollo";
+import { login, loginVariables } from "../../__generated__/login";
 import { useForm } from "react-hook-form";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { AuthTextInput } from "../../styles/inputs";
@@ -52,17 +53,16 @@ export default function Login({ route: { params } }: any) {
     if (ok) await logUserIn(token);
   };
 
-  const [loginMutation, { loading }] = useMutation(LOGIN_MUTATION, {
-    onCompleted,
-  });
+  const [loginMutation, { loading }] = useMutation<login, loginVariables>(
+    LOGIN_MUTATION,
+    { onCompleted }
+  );
 
   const registerObj = { required: true, minLength: 5, maxLength: 20 };
   useEffect(() => {
     register("username", registerObj);
     register("password", registerObj);
   }, [register]);
-
-  const goToCreateAccount = () => navigation.navigate("CreateAccount");
 
   return (
     <AuthLayout>
@@ -97,7 +97,10 @@ export default function Login({ route: { params } }: any) {
         text="Log in"
         style={{ marginBottom: 8 }}
       />
-      <TextBtn onPress={goToCreateAccount} text="Create Account" />
+      <TextBtn
+        onPress={() => navigation.navigate("CreateAccount")}
+        text="Create Account"
+      />
     </AuthLayout>
   );
 }

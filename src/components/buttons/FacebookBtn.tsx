@@ -4,10 +4,10 @@ import { colors } from "../../styles/colors";
 import { ButtonSharedProps, ButtonTextSharedProps } from "../../styles/buttons";
 import { Ionicons } from "@expo/vector-icons";
 
-const TextButton = styled.TouchableOpacity`
+const Button = styled.TouchableOpacity`
   ${ButtonSharedProps};
 `;
-const FacebookText = styled.Text`
+const ButtonText = styled.Text`
   ${ButtonTextSharedProps};
   color: ${colors.facebookColor};
 `;
@@ -16,11 +16,11 @@ export default function FacebookBtn() {
   const goToFacebookLogin = () => {};
 
   return (
-    <TextButton onPress={goToFacebookLogin}>
-      <FacebookText>
+    <Button onPress={goToFacebookLogin}>
+      <ButtonText>
         <Ionicons name="logo-facebook" size={20} />
         {` Log in With Facebook`}
-      </FacebookText>
-    </TextButton>
+      </ButtonText>
+    </Button>
   );
 }

@@ -9,18 +9,18 @@ interface IProps {
   style?: any;
 }
 
-const TextButton = styled.TouchableOpacity`
+const Button = styled.TouchableOpacity`
   ${ButtonSharedProps};
 `;
-const TextButtonText = styled.Text`
+const ButtonText = styled.Text`
   ${ButtonTextSharedProps};
   color: ${colors.main};
 `;
 
 export default function SolidBtn({ onPress, text }: IProps) {
   return (
-    <TextButton onPress={onPress}>
-      <TextButtonText>{text}</TextButtonText>
-    </TextButton>
+    <Button onPress={onPress}>
+      <ButtonText>{text}</ButtonText>
+    </Button>
   );
 }
