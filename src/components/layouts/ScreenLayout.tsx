@@ -3,6 +3,11 @@ import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 
+interface IProps {
+  children: React.ReactNode;
+  loading: boolean;
+}
+
 const View = styled.View`
   flex: 1;
   justify-content: center;
@@ -10,7 +15,7 @@ const View = styled.View`
   background-color: ${colors.white};
 `;
 
-export default function ScreenLayout({ children, loading }: any) {
+export default function ScreenLayout({ children, loading }: IProps) {
   return (
     <View>
       {loading ? (

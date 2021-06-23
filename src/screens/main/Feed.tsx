@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { RefreshControl } from "react-native";
+import React, { useEffect, useState } from "react";
+import { FlatList, RefreshControl } from "react-native";
 import { gql, useQuery } from "@apollo/client";
 import { seeFeed, seeFeedVariables } from "../../__generated__/seeFeed";
 import {
@@ -7,10 +7,9 @@ import {
   PHOTO_FRAGMENT,
   COMMENT_FRAGMENT,
 } from "../../../fragments";
-import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import ScreenLayout from "../../components/layouts/ScreenLayout";
-import Photo from "./Photo";
+import FeedUnit from "../sub/FeedUnit";
 
 interface IProps {
   item: {
@@ -26,10 +25,6 @@ interface IProps {
     isLiked: boolean;
   };
 }
-
-const FlatList = styled.FlatList`
-  width: 100%;
-`;
 
 const SEE_FEED_QUERY = gql`
   query seeFeed($offset: Int!) {
@@ -61,14 +56,18 @@ export default function Feed() {
   const { data, loading, refetch, fetchMore } = useQuery<
     seeFeed,
     seeFeedVariables
-  >(SEE_FEED_QUERY, { variables: { offset } });
+  >(SEE_FEED_QUERY, { variables: { offset: 0 } });
   const onRefresh = async () => {
     setIsRefreshing(true);
     await refetch();
     setIsRefreshing(false);
   };
 
-  const renderItem = ({ item }: IProps) => <Photo {...item} />;
+  useEffect(() => {
+    setOffset(data?.seeFeed?.photos?.length || 0);
+  });
+
+  const renderItem = ({ item }: IProps) => <FeedUnit {...item} />;
 
   return (
     <ScreenLayout loading={loading}>
@@ -93,6 +92,7 @@ export default function Feed() {
         }
         renderItem={renderItem}
         keyExtractor={(item: any) => "" + item.id}
+        style={{ width: "100%" }}
       />
     </ScreenLayout>
   );
