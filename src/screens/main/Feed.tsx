@@ -47,12 +47,11 @@ const SEE_FEED_QUERY = gql`
 `;
 
 export default function Feed() {
-  const [offset, setOffset] = useState<number>(0);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const { data, loading, refetch, fetchMore } = useQuery<
     seeFeed,
     seeFeedVariables
-  >(SEE_FEED_QUERY, { variables: { offset: offset } });
+  >(SEE_FEED_QUERY, { variables: { offset: 0 } });
 
   const onRefresh = async () => {
     setIsRefreshing(true);
