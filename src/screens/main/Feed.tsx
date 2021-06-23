@@ -62,6 +62,8 @@ export default function Feed() {
     setIsRefreshing(false);
   };
 
+  console.log(data?.seeFeed?.photos);
+
   const renderItem = ({ item }: IProps) => <FeedUnit {...item} />;
 
   return (
