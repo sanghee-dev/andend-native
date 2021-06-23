@@ -29,19 +29,15 @@ interface IProps {
 const SEE_FEED_QUERY = gql`
   query seeFeed($offset: Int!) {
     seeFeed(offset: $offset) {
-      ok
-      error
-      photos {
-        ...PhotoFragment
-        user {
-          ...UserFragment
-        }
-        isLiked
-        likeNumber
-        commentNumber
-        comments {
-          ...CommentFragment
-        }
+      ...PhotoFragment
+      user {
+        ...UserFragment
+      }
+      isLiked
+      likeNumber
+      commentNumber
+      comments {
+        ...CommentFragment
       }
     }
   }
@@ -51,19 +47,18 @@ const SEE_FEED_QUERY = gql`
 `;
 
 export default function Feed() {
+  const [offset, setOffset] = useState<number>(0);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const { data, loading, refetch, fetchMore } = useQuery<
     seeFeed,
     seeFeedVariables
-  >(SEE_FEED_QUERY, { variables: { offset: 0 } });
+  >(SEE_FEED_QUERY, { variables: { offset: offset } });
+
   const onRefresh = async () => {
     setIsRefreshing(true);
     await refetch();
     setIsRefreshing(false);
   };
-
-  console.log(data?.seeFeed?.photos);
-
   const renderItem = ({ item }: IProps) => <FeedUnit {...item} />;
 
   return (
@@ -71,13 +66,11 @@ export default function Feed() {
       <FlatList
         onEndReachedThreshold={0.02}
         onEndReached={() =>
-          fetchMore({
-            variables: { offset: data?.seeFeed?.photos?.length },
-          })
+          fetchMore({ variables: { offset: data?.seeFeed?.length } })
         }
         refreshing={isRefreshing}
         onRefresh={onRefresh}
-        data={data?.seeFeed?.photos}
+        data={data?.seeFeed}
         refreshControl={
           <RefreshControl
             refreshing={isRefreshing}

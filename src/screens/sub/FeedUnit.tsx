@@ -101,7 +101,7 @@ export default function FeedUnit({
   caption,
   likeNumber,
   isLiked,
-}): IProps {
+}): any {
   const navigation = useNavigation();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [imageHeight, setImageHeight] = useState<number>(400);

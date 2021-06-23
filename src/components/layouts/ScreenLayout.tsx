@@ -20,7 +20,7 @@ export default function ScreenLayout({ children, loading }: IProps) {
       {loading ? (
         <ActivityIndicator color={colors.main} size="small" />
       ) : (
-        <>{children}</>
+        children
       )}
     </View>
   );

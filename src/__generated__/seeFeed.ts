@@ -7,52 +7,45 @@
 // GraphQL query operation: seeFeed
 // ====================================================
 
-export interface seeFeed_seeFeed_photos_user {
+export interface seeFeed_seeFeed_user {
   __typename: "User";
   id: number;
   username: string;
   avatar: string | null;
 }
 
-export interface seeFeed_seeFeed_photos_comments_user {
+export interface seeFeed_seeFeed_comments_user {
   __typename: "User";
   username: string;
   avatar: string | null;
 }
 
-export interface seeFeed_seeFeed_photos_comments {
+export interface seeFeed_seeFeed_comments {
   __typename: "Comment";
   id: number;
   createdAt: string;
   updatedAt: string;
-  user: seeFeed_seeFeed_photos_comments_user;
+  user: seeFeed_seeFeed_comments_user;
   payload: string;
   isMine: boolean;
 }
 
-export interface seeFeed_seeFeed_photos {
+export interface seeFeed_seeFeed {
   __typename: "Photo";
   id: number;
   createdAt: string;
   updatedAt: string;
   file: string;
   caption: string | null;
-  user: seeFeed_seeFeed_photos_user;
+  user: seeFeed_seeFeed_user;
   isLiked: boolean;
   likeNumber: number;
   commentNumber: number;
-  comments: (seeFeed_seeFeed_photos_comments | null)[] | null;
-}
-
-export interface seeFeed_seeFeed {
-  __typename: "SeeFeedResult";
-  ok: boolean;
-  error: string | null;
-  photos: (seeFeed_seeFeed_photos | null)[] | null;
+  comments: (seeFeed_seeFeed_comments | null)[] | null;
 }
 
 export interface seeFeed {
-  seeFeed: seeFeed_seeFeed;
+  seeFeed: (seeFeed_seeFeed | null)[] | null;
 }
 
 export interface seeFeedVariables {
