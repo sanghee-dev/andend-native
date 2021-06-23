@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FlatList, RefreshControl } from "react-native";
 import { gql, useQuery } from "@apollo/client";
 import { seeFeed, seeFeedVariables } from "../../__generated__/seeFeed";
@@ -52,7 +52,6 @@ const SEE_FEED_QUERY = gql`
 
 export default function Feed() {
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
-  const [offset, setOffset] = useState<number>(0);
   const { data, loading, refetch, fetchMore } = useQuery<
     seeFeed,
     seeFeedVariables
@@ -63,10 +62,6 @@ export default function Feed() {
     setIsRefreshing(false);
   };
 
-  useEffect(() => {
-    setOffset(data?.seeFeed?.photos?.length || 0);
-  });
-
   const renderItem = ({ item }: IProps) => <FeedUnit {...item} />;
 
   return (
@@ -75,9 +70,7 @@ export default function Feed() {
         onEndReachedThreshold={0.02}
         onEndReached={() =>
           fetchMore({
-            variables: {
-              offset: data?.seeFeed?.photos?.length,
-            },
+            variables: { offset: data?.seeFeed?.photos?.length },
           })
         }
         refreshing={isRefreshing}
