@@ -9,12 +9,12 @@ interface IProps {
 }
 
 const View = styled.View`
-  flex: 1;
+  width: 100%;
   align-items: center;
   background-color: ${colors.white};
 `;
 
-export default function ScreenLayout({ children, loading }: IProps) {
+export default function ScrollLayout({ children, loading }: IProps) {
   return (
     <View>
       {loading ? (

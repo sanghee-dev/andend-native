@@ -5,7 +5,7 @@ import {
   toggleLike,
   toggleLikeVariables,
 } from "../../__generated__/toggleLike";
-import ScreenLayout from "../../components/layouts/ScreenLayout";
+import ScrollLayout from "../../components/layouts/ScrollLayout";
 import { Image, useWindowDimensions } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
@@ -145,7 +145,7 @@ export default function FeedUnit({
   );
 
   return (
-    <ScreenLayout loading={false}>
+    <ScrollLayout loading={false}>
       <Header>
         <User>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
@@ -190,7 +190,7 @@ export default function FeedUnit({
       </Actions>
 
       <ExtraContainer>
-        <LikeNumber onPress={() => navigation.navigate("Likes")}>
+        <LikeNumber onPress={() => navigation.navigate("Likes", { id })}>
           <LikeNumberText>{likeNumber} likes</LikeNumberText>
         </LikeNumber>
         <Caption>
@@ -200,6 +200,6 @@ export default function FeedUnit({
           <CaptionText>{caption}</CaptionText>
         </Caption>
       </ExtraContainer>
-    </ScreenLayout>
+    </ScrollLayout>
   );
 }

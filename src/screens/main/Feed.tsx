@@ -8,8 +8,8 @@ import {
   COMMENT_FRAGMENT,
 } from "../../../fragments";
 import { colors } from "../../styles/colors";
-import ScreenLayout from "../../components/layouts/ScreenLayout";
-import FeedUnit from "../sub/FeedUnit";
+import ScrollLayout from "../../components/layouts/ScrollLayout";
+import FeedUnit from "../unit/FeedUnit";
 
 interface IProps {
   item: {
@@ -61,7 +61,7 @@ export default function Feed() {
   const renderItem = ({ item }: IProps) => <FeedUnit {...item} />;
 
   return (
-    <ScreenLayout loading={loading}>
+    <ScrollLayout loading={loading}>
       <FlatList
         onEndReachedThreshold={0.02}
         onEndReached={() =>
@@ -81,6 +81,6 @@ export default function Feed() {
         keyExtractor={(item: any) => "" + item.id}
         style={{ width: "100%" }}
       />
-    </ScreenLayout>
+    </ScrollLayout>
   );
 }

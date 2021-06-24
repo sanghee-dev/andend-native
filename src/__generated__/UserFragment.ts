@@ -12,4 +12,6 @@ export interface UserFragment {
   id: number;
   username: string;
   avatar: string | null;
+  isFollowing: boolean;
+  isMe: boolean;
 }

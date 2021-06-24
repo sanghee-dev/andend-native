@@ -12,6 +12,8 @@ export interface seeFeed_seeFeed_user {
   id: number;
   username: string;
   avatar: string | null;
+  isFollowing: boolean;
+  isMe: boolean;
 }
 
 export interface seeFeed_seeFeed_comments_user {
