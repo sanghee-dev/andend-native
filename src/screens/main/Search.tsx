@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useWindowDimensions } from "react-native";
+import {
+  searchPhotos,
+  searchPhotosVariables,
+} from "../../__generated__/searchPhotos";
 import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import styled from "styled-components/native";
@@ -12,6 +16,19 @@ interface IFormProps {
   keyword: string;
 }
 
+const SEARCH_PHOTOS_QUERY = gql`
+  query searchPhotos($keyword: String!, $offset: Int!) {
+    searchPhotos(keyword: $keyword, offset: $offset) {
+      ok
+      error
+      photos {
+        id
+        file
+      }
+    }
+  }
+`;
+
 const TextInput = styled.TextInput`
   background-color: ${colors.white};
   color: ${colors.black};
@@ -19,18 +36,17 @@ const TextInput = styled.TextInput`
   border: ${borders.border};
   padding: 6px 12px;
   border-radius: 100px;
+  font-weight: 300;
 `;
 const Text = styled.Text``;
 
 export default function Search() {
-  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const navigation = useNavigation();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
 
   const headerTitle = () => (
     <TextInput
       onChangeText={(text: string) => setValue("keyword", text)}
-      // onSubmitEditing={handleSubmit(onValid)}
       value={watch("keyword")}
       placeholder="Serach photos"
       placeholderTextColor={colors.grayDark}
@@ -43,20 +59,15 @@ export default function Search() {
   );
 
   const { register, handleSubmit, setValue, watch } = useForm<IFormProps>();
-  // const onValid = (data: any) => {
-  //   if (!loading) searchPhotosQuery({ variables: { ...data } });
-  // };
-  // const onCompleted = async (data: any) => {
-  //   const {
-  //     searchPhotos: { ok, error, photos },
-  //   } = data;
-  // };
+  const onCompleted = async (data: any) => {
+    const {
+      searchPhotos: { ok, error, photos },
+    } = data;
+  };
 
-  // const [searchPhotosQuery, { loading }] = useQuery(SEARCH_PHOTOS_QUERY, {
-  //   onCompleted,
-  // });
 
   console.log(watch("keyword"));
+  console.log(data);
 
   const registerObj = { required: true, minLength: 1 };
   useEffect(() => {
@@ -65,7 +76,7 @@ export default function Search() {
   }, [register]);
 
   return (
-    <ScrollWithoutFeedbackLayout loading={false}>
+    <ScrollWithoutFeedbackLayout loading={loading}>
       <Text>hello</Text>
     </ScrollWithoutFeedbackLayout>
   );

@@ -32,7 +32,7 @@ export default function Avatar({ uri, size, style }: IProps) {
         name="flower-outline" // "flower-sharp"
         size={size * 0.92}
         style={{
-          color: colors.main,
+          color: colors.black,
         }}
       />
     </Icon>
