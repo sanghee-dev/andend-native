@@ -3,6 +3,11 @@ import { Platform, Keyboard } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 
+interface IProps {
+  children: React.ReactNode;
+  style?: any;
+}
+
 const TouchableWithoutFeedback = styled.TouchableWithoutFeedback`
   flex: 1;
 `;
@@ -18,13 +23,14 @@ const KeyboardAvoidingView = styled.KeyboardAvoidingView`
   align-items: center;
 `;
 
-export default function AuthLayout({ children }: any) {
+export default function AuthLayout({ children, style }: IProps) {
   const dismissKeyboard = () => Keyboard.dismiss();
 
   return (
     <TouchableWithoutFeedback
       onPress={dismissKeyboard}
       disabled={Platform.OS === "web"}
+      style={style}
     >
       <Container>
         <KeyboardAvoidingView

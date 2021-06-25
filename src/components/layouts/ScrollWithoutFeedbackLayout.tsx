@@ -11,6 +11,7 @@ import { colors } from "../../styles/colors";
 interface IProps {
   children: React.ReactNode;
   loading: boolean;
+  style?: any;
 }
 
 const View = styled.View`
@@ -22,6 +23,7 @@ const View = styled.View`
 export default function ScrollWithoutFeedbackLayout({
   children,
   loading,
+  style,
 }: IProps) {
   const dismissKeyboard = () => Keyboard.dismiss();
 
@@ -29,6 +31,7 @@ export default function ScrollWithoutFeedbackLayout({
     <TouchableWithoutFeedback
       onPress={dismissKeyboard}
       disabled={Platform.OS === "web"}
+      style={style}
     >
       {loading ? (
         <ActivityIndicator color={colors.main} size="small" />

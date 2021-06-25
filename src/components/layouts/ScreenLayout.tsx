@@ -6,6 +6,7 @@ import { colors } from "../../styles/colors";
 interface IProps {
   children: React.ReactNode;
   loading: boolean;
+  style?: any;
 }
 
 const View = styled.View`
@@ -14,9 +15,9 @@ const View = styled.View`
   background-color: ${colors.white};
 `;
 
-export default function ScreenLayout({ children, loading }: IProps) {
+export default function ScreenLayout({ children, loading, style }: IProps) {
   return (
-    <View>
+    <View style={style}>
       {loading ? (
         <ActivityIndicator color={colors.main} size="small" />
       ) : (
