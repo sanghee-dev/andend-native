@@ -5,7 +5,7 @@ export const ButtonSharedProps = `
   width: 90%;
   align-items: center;
   padding: ${spaces.paddingTopBottom};
-  border-radius: 100;
+  border-radius: 100px;
   opacity: ${(props: any) => (props.disabled ? 0.5 : 1)};
 `;
 

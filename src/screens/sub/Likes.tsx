@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, RefreshControl, Text } from "react-native";
+import { FlatList, RefreshControl } from "react-native";
 import { gql, useQuery } from "@apollo/client";
 import {
   seePhotoLikes,
   seePhotoLikesVariables,
 } from "../../__generated__/seePhotoLikes";
 import { USER_FRAGMENT } from "../../../fragments";
-import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import ScrollLayout from "../../components/layouts/ScrollLayout";
 import UserUnit from "../unit/UserUnit";

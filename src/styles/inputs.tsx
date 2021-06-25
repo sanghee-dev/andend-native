@@ -9,7 +9,7 @@ export const AuthTextInput = styled.TextInput`
   margin-bottom: ${(props: any) =>
     props.lastChild ? spaces.unit : spaces.unit / 2}px;
   padding: 12px;
-  border-radius: 4;
+  border-radius: 4px;
   border: 0.5px solid ${colors.gray};
   background-color: ${colors.grayLight};
   font-size: ${fonts.text};

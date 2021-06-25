@@ -19,9 +19,7 @@ const KeyboardAvoidingView = styled.KeyboardAvoidingView`
 `;
 
 export default function AuthLayout({ children }: any) {
-  const dismissKeyboard = () => {
-    Keyboard.dismiss();
-  };
+  const dismissKeyboard = () => Keyboard.dismiss();
 
   return (
     <TouchableWithoutFeedback

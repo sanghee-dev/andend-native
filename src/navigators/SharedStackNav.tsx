@@ -45,7 +45,11 @@ export default function SharedStackNav({ screenName }: any) {
         />
       ) : null}
       {screenName === "Search" ? (
-        <Stack.Screen name={"Search"} component={Search} />
+        <Stack.Screen
+          name={"Search"}
+          component={Search}
+          options={{ headerStyle: { height: 100 } }}
+        />
       ) : null}
       {screenName === "Notifications" ? (
         <Stack.Screen name={"Notifications"} component={Notifications} />

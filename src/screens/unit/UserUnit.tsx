@@ -10,7 +10,7 @@ const Container = styled.View`
 const File = styled.Image`
   width: 40px;
   height: 40px;
-  border-radius: 100;
+  border-radius: 100px;
   border: 1px solid gray;
 `;
 

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { Image, useWindowDimensions } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import styled from "styled-components/native";
 import { gql, useMutation } from "@apollo/client";
 import {
   toggleLike,
   toggleLikeVariables,
 } from "../../__generated__/toggleLike";
 import ScrollLayout from "../../components/layouts/ScrollLayout";
-import { Image, useWindowDimensions } from "react-native";
-import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import { borders } from "../../styles/borders";
 import { spaces } from "../../styles/spaces";
@@ -49,7 +49,7 @@ const User = styled.View`
 const Avatar = styled.Image`
   width: 32px;
   height: 32px;
-  border-radius: 100;
+  border-radius: 100px;
   border: ${borders.border};
 `;
 const Username = styled.Text`
