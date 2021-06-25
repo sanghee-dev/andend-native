@@ -54,6 +54,7 @@ const MessageText = styled.Text`
 `;
 
 export default function Search() {
+  const [numColumns, setNumColumns] = useState<number>(2);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const navigation = useNavigation();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
@@ -91,7 +92,7 @@ export default function Search() {
     setIsRefreshing(false);
   };
   const renderItem = ({ item }: IProps) => (
-    <Picture uri={item?.file} size={150} />
+    <Picture uri={item?.file} size={windowWidth / numColumns} />
   );
 
   return (
@@ -129,7 +130,7 @@ export default function Search() {
             }
             renderItem={renderItem}
             keyExtractor={(item: any) => "" + item.id}
-            style={{}}
+            numColumns={numColumns}
           />
         )}
       </ScrollWithoutFeedbackLayout>
