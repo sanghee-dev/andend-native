@@ -16,7 +16,7 @@ const Image = styled.Image`
 const Icon = styled.View`
   border: ${borders.border};
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 export default function Avatar({ uri, size, style }: IProps) {
@@ -27,10 +27,10 @@ export default function Avatar({ uri, size, style }: IProps) {
       style={{ width: size, height: size, borderRadius: size, ...style }}
     />
   ) : (
-    <Icon style={{ width: size, height: size, borderRadius: size }}>
+    <Icon style={{ width: size, height: size, borderRadius: size, ...style }}>
       <Ionicons
-        name="flower-sharp" // "flower-outline"
-        size={size * 0.94}
+        name="flower-outline" // "flower-sharp"
+        size={size * 0.92}
         style={{
           color: colors.main,
         }}
