@@ -21,5 +21,5 @@ export default function useMe() {
     if (data?.me === null) logUserOut();
   }, [data]);
 
-  return data?.me;
+  return { data };
 }

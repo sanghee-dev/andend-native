@@ -12,8 +12,7 @@ const Username = styled.Text`
 
 export default function Me() {
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
-  const { username, avatar } = useMe();
-  console.log(username, avatar);
+  const { data } = useMe();
 
   return (
     <ScreenLayout
@@ -24,8 +23,8 @@ export default function Me() {
         alignItems: "center",
       }}
     >
-      <Avatar uri={avatar} size={80} style={{ marginBottom: 20 }} />
-      <Username>{username}</Username>
+      <Avatar uri={data?.me?.avatar} size={80} style={{ marginBottom: 20 }} />
+      <Username>{data?.me?.username}</Username>
       <LogOutBtn />
     </ScreenLayout>
   );
