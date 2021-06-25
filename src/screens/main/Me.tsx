@@ -4,15 +4,8 @@ import styled from "styled-components/native";
 import ScreenLayout from "../../components/layouts/ScreenLayout";
 import LogOutBtn from "../../components/buttons/LogOutBtn";
 import useMe from "../../hooks/useMe";
-import { borders } from "../../styles/borders";
+import Avatar from "../../components/images/Avatar";
 
-const Avatar = styled.Image`
-  width: 80px;
-  height: 80px;
-  border: ${borders.border};
-  border-radius: 80px;
-  margin-bottom: 20px;
-`;
 const Username = styled.Text`
   margin-bottom: 20px;
 `;
@@ -31,7 +24,7 @@ export default function Me() {
         alignItems: "center",
       }}
     >
-      <Avatar source={{ uri: avatar }} resizeMode="contain" />
+      <Avatar uri={avatar} size={80} style={{ marginBottom: 20 }} />
       <Username>{username}</Username>
       <LogOutBtn />
     </ScreenLayout>

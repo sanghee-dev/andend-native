@@ -9,9 +9,9 @@ import {
 } from "../../__generated__/toggleLike";
 import ScrollLayout from "../../components/layouts/ScrollLayout";
 import { colors } from "../../styles/colors";
-import { borders } from "../../styles/borders";
 import { spaces } from "../../styles/spaces";
 import { Ionicons } from "@expo/vector-icons";
+import Avatar from "../../components/images/Avatar";
 
 interface IProps {
   id: number;
@@ -46,12 +46,7 @@ const User = styled.View`
   flex-direction: row;
   align-items: center;
 `;
-const Avatar = styled.Image`
-  width: 32px;
-  height: 32px;
-  border-radius: 100px;
-  border: ${borders.border};
-`;
+
 const Username = styled.Text`
   margin-left: 4px;
   font-weight: 500;
@@ -145,15 +140,11 @@ export default function FeedUnit({
   );
 
   return (
-    <ScrollLayout loading={false}>
+    <ScrollLayout loading={false} style={{ marginBottom: 60 }}>
       <Header>
         <User>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-            {user?.avatar ? (
-              <Avatar source={{ uri: user?.avatar }} resizeMode="contain" />
-            ) : (
-              <Ionicons name="person-circle-outline" size={40} />
-            )}
+            <Avatar uri={user?.avatar} size={32} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
             <Username>{user.username}</Username>
