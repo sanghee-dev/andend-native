@@ -5,7 +5,6 @@ import {
   TouchableWithoutFeedback,
   ActivityIndicator,
 } from "react-native";
-import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 
 interface IProps {
@@ -13,12 +12,6 @@ interface IProps {
   loading: boolean;
   style?: any;
 }
-
-const View = styled.View`
-  width: 100%;
-  align-items: center;
-  background-color: ${colors.white};
-`;
 
 export default function ScrollWithoutFeedbackLayout({
   children,
@@ -31,7 +24,12 @@ export default function ScrollWithoutFeedbackLayout({
     <TouchableWithoutFeedback
       onPress={dismissKeyboard}
       disabled={Platform.OS === "web"}
-      style={style}
+      style={{
+        width: "100%",
+        alignItems: "center",
+        backgroundColor: colors.white,
+        ...style,
+      }}
     >
       {loading ? (
         <ActivityIndicator color={colors.main} size="small" />

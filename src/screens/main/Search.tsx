@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useWindowDimensions } from "react-native";
+import { FlatList, RefreshControl, useWindowDimensions } from "react-native";
+import { gql, useLazyQuery } from "@apollo/client";
 import {
   searchPhotos,
   searchPhotosVariables,
@@ -11,7 +12,14 @@ import ScrollWithoutFeedbackLayout from "../../components/layouts/ScrollWithoutF
 import { colors } from "../../styles/colors";
 import { borders } from "../../styles/borders";
 import { fonts } from "../../styles/fonts";
+import Picture from "../../components/images/Picture";
 
+interface IProps {
+  item: {
+    id: number;
+    file: string;
+  };
+}
 interface IFormProps {
   keyword: string;
 }
@@ -39,14 +47,28 @@ const TextInput = styled.TextInput`
   font-weight: 300;
 `;
 const Text = styled.Text``;
+const SearchingText = styled.Text`
+  text-align: center;
+  color: ${colors.grayDark};
+  font-size: ${fonts.title};
+  margin-top: 200px;
+`;
 
 export default function Search() {
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const navigation = useNavigation();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
 
-  const headerTitle = () => (
+  const { register, setValue, watch, handleSubmit } = useForm<IFormProps>();
+  const [startQueryFn, { loading, data, fetchMore, refetch, called }] =
+    useLazyQuery<searchPhotos, searchPhotosVariables>(SEARCH_PHOTOS_QUERY, {
+      variables: { keyword: watch("keyword"), offset: 0 },
+    });
+
+  const SearchBox = () => (
     <TextInput
       onChangeText={(text: string) => setValue("keyword", text)}
+      onSubmitEditing={startQueryFn}
       value={watch("keyword")}
       placeholder="Serach photos"
       placeholderTextColor={colors.grayDark}
@@ -58,26 +80,58 @@ export default function Search() {
     />
   );
 
-  const { register, handleSubmit, setValue, watch } = useForm<IFormProps>();
-  const onCompleted = async (data: any) => {
-    const {
-      searchPhotos: { ok, error, photos },
-    } = data;
-  };
-
-
-  console.log(watch("keyword"));
-  console.log(data);
-
   const registerObj = { required: true, minLength: 1 };
   useEffect(() => {
-    navigation.setOptions({ headerTitle });
+    navigation.setOptions({ headerTitle: SearchBox });
     register("keyword", registerObj);
   }, [register]);
 
+  const onRefresh = async () => {
+    setIsRefreshing(true);
+    await refetch();
+    setIsRefreshing(false);
+  };
+  const renderItem = ({ item }: IProps) => (
+    <Picture uri={item?.file} size={150} />
+  );
+  const onSubmit = () => {};
+
   return (
-    <ScrollWithoutFeedbackLayout loading={loading}>
-      <Text>hello</Text>
-    </ScrollWithoutFeedbackLayout>
+    <>
+      <ScrollWithoutFeedbackLayout
+        loading={loading}
+        style={{
+          height: 400,
+          justifyContent: "center",
+          backgroundColor: "red",
+        }}
+      >
+        {!called ? (
+          <SearchingText>Search by keyword</SearchingText>
+        ) : (
+          <FlatList
+            onEndReachedThreshold={0.02}
+            onEndReached={() =>
+              fetchMore({
+                variables: { offset: data?.searchPhotos?.photos?.length || 1 },
+              })
+            }
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            data={data?.searchPhotos?.photos}
+            refreshControl={
+              <RefreshControl
+                refreshing={isRefreshing}
+                onRefresh={onRefresh}
+                tintColor={colors.main}
+              />
+            }
+            renderItem={renderItem}
+            keyExtractor={(item: any) => "" + item.id}
+            style={{}}
+          />
+        )}
+      </ScrollWithoutFeedbackLayout>
+    </>
   );
 }
