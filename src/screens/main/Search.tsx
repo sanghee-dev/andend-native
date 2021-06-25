@@ -6,9 +6,9 @@ import {
   searchPhotosVariables,
 } from "../../__generated__/searchPhotos";
 import { useNavigation } from "@react-navigation/native";
-import { Message, useForm } from "react-hook-form";
-import styled from "styled-components/native";
+import { useForm } from "react-hook-form";
 import ScrollWithoutFeedbackLayout from "../../components/layouts/ScrollWithoutFeedbackLayout";
+import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import { borders } from "../../styles/borders";
 import { fonts } from "../../styles/fonts";
@@ -80,10 +80,9 @@ export default function Search() {
     />
   );
 
-  const registerObj = { required: true, minLength: 1 };
   useEffect(() => {
     navigation.setOptions({ headerTitle: SearchBox });
-    register("keyword", registerObj);
+    register("keyword", { required: true, minLength: 1 });
   }, [register]);
 
   const onRefresh = async () => {
@@ -96,44 +95,35 @@ export default function Search() {
   );
 
   return (
-    <>
-      <ScrollWithoutFeedbackLayout
-        loading={loading}
-        style={{
-          height: 400,
-          justifyContent: "center",
-          backgroundColor: "red",
-        }}
-      >
-        {!called ? (
-          <MessageText>Search by keyword</MessageText>
-        ) : !data?.searchPhotos?.photos ||
-          data?.searchPhotos?.photos?.length === 0 ? (
-          <MessageText>Could not find anything</MessageText>
-        ) : (
-          <FlatList
-            onEndReachedThreshold={0.02}
-            onEndReached={() =>
-              fetchMore({
-                variables: { offset: data?.searchPhotos?.photos?.length || 1 },
-              })
-            }
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-            data={data?.searchPhotos?.photos}
-            refreshControl={
-              <RefreshControl
-                refreshing={isRefreshing}
-                onRefresh={onRefresh}
-                tintColor={colors.main}
-              />
-            }
-            renderItem={renderItem}
-            keyExtractor={(item: any) => "" + item.id}
-            numColumns={numColumns}
-          />
-        )}
-      </ScrollWithoutFeedbackLayout>
-    </>
+    <ScrollWithoutFeedbackLayout loading={loading}>
+      {!called ? (
+        <MessageText>Search by keyword</MessageText>
+      ) : !data?.searchPhotos?.photos ||
+        data?.searchPhotos?.photos?.length === 0 ? (
+        <MessageText>Could not find anything</MessageText>
+      ) : (
+        <FlatList
+          onEndReachedThreshold={0.02}
+          onEndReached={() =>
+            fetchMore({
+              variables: { offset: data?.searchPhotos?.photos?.length || 1 },
+            })
+          }
+          refreshing={isRefreshing}
+          onRefresh={onRefresh}
+          data={data?.searchPhotos?.photos}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.main}
+            />
+          }
+          renderItem={renderItem}
+          keyExtractor={(item: any) => "" + item.id}
+          numColumns={numColumns}
+        />
+      )}
+    </ScrollWithoutFeedbackLayout>
   );
 }
