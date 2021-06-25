@@ -6,7 +6,7 @@ import {
   searchPhotosVariables,
 } from "../../__generated__/searchPhotos";
 import { useNavigation } from "@react-navigation/native";
-import { useForm } from "react-hook-form";
+import { Message, useForm } from "react-hook-form";
 import styled from "styled-components/native";
 import ScrollWithoutFeedbackLayout from "../../components/layouts/ScrollWithoutFeedbackLayout";
 import { colors } from "../../styles/colors";
@@ -46,8 +46,7 @@ const TextInput = styled.TextInput`
   border-radius: 100px;
   font-weight: 300;
 `;
-const Text = styled.Text``;
-const SearchingText = styled.Text`
+const MessageText = styled.Text`
   text-align: center;
   color: ${colors.grayDark};
   font-size: ${fonts.title};
@@ -61,14 +60,14 @@ export default function Search() {
 
   const { register, setValue, watch, handleSubmit } = useForm<IFormProps>();
   const [startQueryFn, { loading, data, fetchMore, refetch, called }] =
-    useLazyQuery<searchPhotos, searchPhotosVariables>(SEARCH_PHOTOS_QUERY, {
-      variables: { keyword: watch("keyword"), offset: 0 },
-    });
+    useLazyQuery<searchPhotos, searchPhotosVariables>(SEARCH_PHOTOS_QUERY);
 
+  const onValid = ({ keyword }) =>
+    startQueryFn({ variables: { keyword, offset: 0 } });
   const SearchBox = () => (
     <TextInput
       onChangeText={(text: string) => setValue("keyword", text)}
-      onSubmitEditing={startQueryFn}
+      onSubmitEditing={handleSubmit(onValid)}
       value={watch("keyword")}
       placeholder="Serach photos"
       placeholderTextColor={colors.grayDark}
@@ -94,7 +93,6 @@ export default function Search() {
   const renderItem = ({ item }: IProps) => (
     <Picture uri={item?.file} size={150} />
   );
-  const onSubmit = () => {};
 
   return (
     <>
@@ -107,7 +105,10 @@ export default function Search() {
         }}
       >
         {!called ? (
-          <SearchingText>Search by keyword</SearchingText>
+          <MessageText>Search by keyword</MessageText>
+        ) : !data?.searchPhotos?.photos ||
+          data?.searchPhotos?.photos?.length === 0 ? (
+          <MessageText>Could not find anything</MessageText>
         ) : (
           <FlatList
             onEndReachedThreshold={0.02}
