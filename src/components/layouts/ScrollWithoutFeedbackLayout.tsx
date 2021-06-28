@@ -9,7 +9,7 @@ import { colors } from "../../styles/colors";
 
 interface IProps {
   children: React.ReactNode;
-  loading: boolean;
+  loading?: boolean;
   style?: any;
 }
 

@@ -89,7 +89,7 @@ export default function CreateAccount() {
   const goToLogin = () => navigation.navigate("Login");
 
   return (
-    <AuthLayout>
+    <AuthLayout loading={loading}>
       <AuthTextInput
         ref={firstNameRef}
         onChangeText={(text: string) => setValue("firstName", text)}

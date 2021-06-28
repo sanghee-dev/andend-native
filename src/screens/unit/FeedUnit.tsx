@@ -14,6 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 import Avatar from "../../components/images/Avatar";
 
 interface IProps {
+  loading: boolean;
   id: number;
   user: {
     id: number;
@@ -90,6 +91,7 @@ const TouchableOpacity = styled.TouchableOpacity``;
 const Text = styled.Text``;
 
 export default function FeedUnit({
+  loading,
   id,
   user,
   file,
@@ -140,7 +142,7 @@ export default function FeedUnit({
   );
 
   return (
-    <ScrollLayout loading={false} style={{ marginBottom: 60 }}>
+    <ScrollLayout loading={loading} style={{ marginBottom: 60 }}>
       <Header>
         <User>
           <TouchableOpacity onPress={() => navigation.navigate("Profile")}>

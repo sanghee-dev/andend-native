@@ -65,7 +65,7 @@ export default function Login({ route: { params } }: any) {
   }, [register]);
 
   return (
-    <AuthLayout>
+    <AuthLayout loading={loading}>
       <AuthTextInput
         ref={usernameRef}
         onChangeText={(text: string) => setValue("username", text)}

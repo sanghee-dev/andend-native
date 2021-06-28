@@ -1,10 +1,11 @@
 import React from "react";
-import { Platform, Keyboard } from "react-native";
+import { Platform, Keyboard, ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 
 interface IProps {
   children: React.ReactNode;
+  loading?: boolean;
   style?: any;
 }
 
@@ -23,7 +24,7 @@ const KeyboardAvoidingView = styled.KeyboardAvoidingView`
   align-items: center;
 `;
 
-export default function AuthLayout({ children, style }: IProps) {
+export default function AuthLayout({ children, style, loading }: IProps) {
   const dismissKeyboard = () => Keyboard.dismiss();
 
   return (
@@ -32,14 +33,18 @@ export default function AuthLayout({ children, style }: IProps) {
       disabled={Platform.OS === "web"}
       style={style}
     >
-      <Container>
-        <KeyboardAvoidingView
-          behavior="padding"
-          keyboardVerticalOffset={Platform.OS === "ios" ? 30 : 40}
-        >
-          {children}
-        </KeyboardAvoidingView>
-      </Container>
+      {loading ? (
+        <ActivityIndicator color={colors.main} size="small" />
+      ) : (
+        <Container>
+          <KeyboardAvoidingView
+            behavior="padding"
+            keyboardVerticalOffset={Platform.OS === "ios" ? 30 : 40}
+          >
+            {children}
+          </KeyboardAvoidingView>
+        </Container>
+      )}
     </TouchableWithoutFeedback>
   );
 }

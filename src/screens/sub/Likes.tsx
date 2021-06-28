@@ -50,7 +50,7 @@ export default function Likes({ route: { params } }: any) {
   const renderItem = ({ item }: IProps) => <UserUnit {...item} />;
 
   return (
-    <ScrollLayout loading={false}>
+    <ScrollLayout loading={loading}>
       <FlatList
         onEndReachedThreshold={0.02}
         onEndReached={() =>

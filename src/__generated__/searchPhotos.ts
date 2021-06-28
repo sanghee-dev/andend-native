@@ -10,10 +10,7 @@
 export interface searchPhotos_searchPhotos_photos {
   __typename: "Photo";
   id: number;
-  createdAt: string;
-  updatedAt: string;
   file: string;
-  caption: string | null;
 }
 
 export interface searchPhotos_searchPhotos {

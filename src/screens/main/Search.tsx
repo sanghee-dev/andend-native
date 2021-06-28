@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, RefreshControl, useWindowDimensions } from "react-native";
+import {
+  FlatList,
+  RefreshControl,
+  useWindowDimensions,
+  TouchableOpacity,
+} from "react-native";
 import { gql, useLazyQuery } from "@apollo/client";
 import {
   searchPhotos,
@@ -63,7 +68,7 @@ export default function Search() {
   const [startQueryFn, { loading, data, fetchMore, refetch, called }] =
     useLazyQuery<searchPhotos, searchPhotosVariables>(SEARCH_PHOTOS_QUERY);
 
-  const onValid = ({ keyword }) =>
+  const onValid = ({ keyword }: string) =>
     startQueryFn({ variables: { keyword, offset: 0 } });
   const SearchBox = () => (
     <TextInput
@@ -91,7 +96,11 @@ export default function Search() {
     setIsRefreshing(false);
   };
   const renderItem = ({ item }: IProps) => (
-    <Picture uri={item?.file} size={windowWidth / numColumns} />
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Photo", { photoId: item.id })}
+    >
+      <Picture uri={item?.file} size={windowWidth / numColumns} />
+    </TouchableOpacity>
   );
 
   return (
