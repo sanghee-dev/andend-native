@@ -100,7 +100,7 @@ export default function SelectPhoto() {
         {isOk && chosenPhotoUri !== "" ? (
           <Image
             source={{ uri: chosenPhotoUri }}
-            style={{ width: (windowWidth / numColumns) * 2, height: "100%" }}
+            style={{ width: windowWidth, height: "100%" }}
           />
         ) : (
           <RequestText>Choose photo</RequestText>
