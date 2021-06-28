@@ -2,10 +2,10 @@ import React from "react";
 import { Text } from "react-native";
 import ScreenLayout from "../../components/layouts/ScreenLayout";
 
-export default function Upload() {
+export default function SelectPhoto() {
   return (
     <ScreenLayout loading={false}>
-      <Text>Upload</Text>
+      <Text>SelectPhoto</Text>
     </ScreenLayout>
   );
 }
