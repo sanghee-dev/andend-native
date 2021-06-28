@@ -83,7 +83,7 @@ export default function SelectPhoto() {
       <IconContainer>
         <Ionicons
           name="checkmark-circle"
-          size={32}
+          size={28}
           color={photo.uri === chosenPhotoUri ? colors.main : colors.gray}
           style={{
             opacity: 0.6,
