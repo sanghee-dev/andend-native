@@ -1,12 +1,11 @@
 import React from "react";
-import { Alert, View } from "react-native";
+import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SharedStackNav from "./SharedStackNav";
 import useMe from "../hooks/useMe";
 import TabIcon from "../components/nav/TabIcon";
 import Avatar from "../components/images/Avatar";
 import { colors } from "../styles/colors";
-import { event } from "react-native-reanimated";
 
 const Tabs = createBottomTabNavigator();
 

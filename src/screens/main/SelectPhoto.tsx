@@ -1,14 +1,24 @@
 import React from "react";
-import { Text } from "react-native";
-import ScreenLayout from "../../components/layouts/ScreenLayout";
+import styled from "styled-components/native";
+import { colors } from "../../styles/colors";
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${colors.white};
+`;
+const Top = styled.View`
+  flex: 1;
+`;
+const Bottom = styled.View`
+  flex: 1;
+  background-color: ${colors.grayLight};
+`;
 
 export default function SelectPhoto() {
   return (
-    <ScreenLayout
-      loading={false}
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    >
-      <Text>SelectPhoto</Text>
-    </ScreenLayout>
+    <Container>
+      <Top></Top>
+      <Bottom></Bottom>
+    </Container>
   );
 }
