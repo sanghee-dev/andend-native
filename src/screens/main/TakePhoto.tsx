@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useWindowDimensions, StatusBar } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Camera } from "expo-camera";
@@ -39,7 +39,7 @@ const TakePhotoBtn = styled.TouchableOpacity`
   border-radius: 70px;
   background-color: ${colors.white};
   opacity: 0.8;
-  margin: 0 80px;
+  margin: 0 40px;
 `;
 const TakePhotoCircle = styled.View``;
 const TakePhotoBtnLine = styled.View`
@@ -65,6 +65,8 @@ const ButtonsContainer = styled.View`
 `;
 
 export default function TakePhoto() {
+  const cameraRef = useRef();
+  const [cameraReady, setCameraReady] = useState<boolean>(false);
   const navigation = useNavigation();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [isOk, setIsOk] = useState<boolean>(false);
@@ -75,6 +77,16 @@ export default function TakePhoto() {
   const [flashMode, setFlashMode] = useState<string>(
     Camera.Constants.FlashMode.auto
   );
+
+  const onCameraReady = () => setCameraReady(true);
+  const takePhoto = async () => {
+    if (cameraRef.current && cameraReady) {
+      const { uri } = await cameraRef.current.takePictureAsync({
+        quality: 1,
+        exif: true,
+      });
+    }
+  };
 
   const getPermissions = async () => {
     const { canAskAgain, granted } = await Camera.getPermissionsAsync();
@@ -116,6 +128,8 @@ export default function TakePhoto() {
       ) : (
         <>
           <Camera
+            ref={cameraRef}
+            onCameraReady={onCameraReady}
             type={cameraType}
             flashMode={flashMode}
             autoFocus="on"
@@ -151,7 +165,7 @@ export default function TakePhoto() {
                   style={{ color: colors.white }}
                 />
               </TouchableOpacity>
-              <TakePhotoBtn>
+              <TakePhotoBtn onPress={takePhoto}>
                 <TakePhotoCircle />
                 <TakePhotoBtnLine />
               </TakePhotoBtn>
@@ -167,7 +181,7 @@ export default function TakePhoto() {
         </>
       )}
       <CloseBtn onPress={onClose}>
-        <Ionicons name="close" size={30} color={colors.black} />
+        <Ionicons name="close" size={30} color={colors.white} />
       </CloseBtn>
     </Container>
   );
