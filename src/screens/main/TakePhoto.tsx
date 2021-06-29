@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useWindowDimensions, StatusBar, Image } from "react-native";
+import { useWindowDimensions, StatusBar, Image, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import { Camera } from "expo-camera";
@@ -67,10 +67,10 @@ const ButtonsContainer = styled.View`
 
 export default function TakePhoto() {
   const cameraRef = useRef();
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [takenPhoto, setTakenPhoto] = useState<string>("");
   const [cameraReady, setCameraReady] = useState<boolean>(false);
   const navigation = useNavigation();
-  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [isOk, setIsOk] = useState<boolean>(false);
   const [cameraType, setCameraType] = useState<string>(
     Camera.Constants.Type.front
@@ -80,7 +80,19 @@ export default function TakePhoto() {
     Camera.Constants.FlashMode.auto
   );
 
-  const uploadPhoto = () => {};
+  const goToUpload = async (save): Promise<boolean> => {
+    if (save) {
+      await MediaLibrary.saveToLibraryAsync(takenPhoto);
+    } else {
+      // const photo = await MediaLibrary.createAssetAsync(takenPhoto);
+    }
+  };
+  const onUploadPhoto = () => {
+    Alert.alert("Photo", "Do you want to save photo?", [
+      { text: "Yes", onPress: () => goToUpload(true) },
+      { text: "No", style: "destructive", onPress: () => goToUpload(false) },
+    ]);
+  };
   const onCameraReady = () => setCameraReady(true);
   const takePhoto = async () => {
     if (cameraRef.current && cameraReady) {
@@ -89,7 +101,6 @@ export default function TakePhoto() {
         exif: true,
       });
       setTakenPhoto(uri);
-      // const asset = await MediaLibrary.createAssetAsync(uri);
     }
   };
 
@@ -142,15 +153,23 @@ export default function TakePhoto() {
               autoFocus="on"
               zoom={zoom}
               whiteBalance="auto"
-              style={{
-                flex: 1,
-              }}
+              style={{ flex: 1 }}
             />
           ) : (
             <Image source={{ uri: takenPhoto }} style={{ flex: 1 }} />
           )}
           <Actions>
-            <SliderContainer></SliderContainer>
+            <SliderContainer>
+              <Slider
+                style={{ width: windowWidth - 120 }}
+                minimumValue={0}
+                maximumValue={1}
+                minimumTrackTintColor={colors.white}
+                maximumTrackTintColor="rgba(255,255,255,0.5)"
+                thumbTintColor={colors.white}
+                onValueChange={onZoomValueChange}
+              />
+            </SliderContainer>
             {takenPhoto === "" ? (
               <ButtonsContainer>
                 <TouchableOpacity onPress={onFlashModeChange}>
@@ -180,7 +199,7 @@ export default function TakePhoto() {
               </ButtonsContainer>
             ) : (
               <ButtonsContainer>
-                <TakePhotoBtn onPress={uploadPhoto}>
+                <TakePhotoBtn onPress={onUploadPhoto}>
                   <TakePhotoCircle />
                   <Ionicons name={"arrow-up"} size={40} color={colors.black} />
                 </TakePhotoBtn>
