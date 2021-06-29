@@ -28,7 +28,6 @@ const IconContainer = styled.View`
   position: absolute;
   right: 0;
 `;
-const IconCircle = styled.View``;
 
 export default function SelectPhoto() {
   const [isOk, setIsOk] = useState<boolean>(false);
