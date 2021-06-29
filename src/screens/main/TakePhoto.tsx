@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useWindowDimensions, StatusBar } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Camera } from "expo-camera";
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
 import SolidBtn from "../../components/buttons/TextBtn";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import Slider from "@react-native-community/slider";
 
 const Container = styled.View`
   flex: 1;
@@ -19,11 +22,14 @@ const RequestText = styled.Text`
   color: ${colors.grayDark};
   font-size: ${fonts.title};
 `;
+const CloseBtn = styled.TouchableOpacity`
+  position: absolute;
+  top: 24px;
+  left: 12px;
+`;
 const Actions = styled.View`
-  flex: 0.3;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex: 0.25;
+  padding-bottom: 20px;
 `;
 const TakePhotoBtn = styled.TouchableOpacity`
   justify-content: center;
@@ -33,6 +39,7 @@ const TakePhotoBtn = styled.TouchableOpacity`
   border-radius: 70px;
   background-color: ${colors.white};
   opacity: 0.8;
+  margin: 0 80px;
 `;
 const TakePhotoCircle = styled.View``;
 const TakePhotoBtnLine = styled.View`
@@ -43,13 +50,30 @@ const TakePhotoBtnLine = styled.View`
   position: absolute;
 `;
 const TouchableOpacity = styled.TouchableOpacity`
-  opacity: 0.5;
+  opacity: 0.8;
+`;
+const SliderContainer = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+const ButtonsContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default function TakePhoto() {
+  const navigation = useNavigation();
+  const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [isOk, setIsOk] = useState<boolean>(false);
   const [cameraType, setCameraType] = useState<string>(
     Camera.Constants.Type.front
+  );
+  const [zoom, setZoom] = useState<number>(0);
+  const [flashMode, setFlashMode] = useState<string>(
+    Camera.Constants.FlashMode.auto
   );
 
   const getPermissions = async () => {
@@ -66,13 +90,24 @@ export default function TakePhoto() {
       setCameraType(Camera.Constants.Type.back);
     } else setCameraType(Camera.Constants.Type.front);
   };
-
+  const onZoomValueChange = (e): number => setZoom(e / 100);
+  const onFlashModeChange = () => {
+    if (flashMode === Camera.Constants.FlashMode.auto) {
+      setFlashMode(Camera.Constants.FlashMode.on);
+    } else if (flashMode === Camera.Constants.FlashMode.on) {
+      setFlashMode(Camera.Constants.FlashMode.off);
+    } else {
+      setFlashMode(Camera.Constants.FlashMode.auto);
+    }
+  };
+  const onClose = () => navigation.navigate("Tabs");
   useEffect(() => {
     getPermissions();
   }, []);
 
   return (
     <Container>
+      <StatusBar hidden={true} />
       {!isOk ? (
         <RequestContainer>
           <RequestText>Plz grant permissions :(</RequestText>
@@ -82,30 +117,58 @@ export default function TakePhoto() {
         <>
           <Camera
             type={cameraType}
-            flashMode="auto"
+            flashMode={flashMode}
             autoFocus="on"
-            zoom={0}
+            zoom={zoom}
             whiteBalance="auto"
-            ratio="4:3"
             style={{
               flex: 1,
             }}
           />
           <Actions>
-            <TakePhotoBtn>
-              <TakePhotoCircle></TakePhotoCircle>
-              <TakePhotoBtnLine></TakePhotoBtnLine>
-            </TakePhotoBtn>
-            <TouchableOpacity onPress={onCameraType}>
-              <Ionicons
-                name="camera-reverse-outline"
-                size={40}
-                style={{ color: colors.white }}
+            <SliderContainer>
+              <Slider
+                style={{ width: windowWidth - 120 }}
+                minimumValue={0}
+                maximumValue={1}
+                minimumTrackTintColor={colors.white}
+                maximumTrackTintColor="rgba(255,255,255,0.5)"
+                thumbTintColor={colors.white}
+                onValueChange={onZoomValueChange}
               />
-            </TouchableOpacity>
+            </SliderContainer>
+            <ButtonsContainer>
+              <TouchableOpacity onPress={onFlashModeChange}>
+                <Ionicons
+                  name={
+                    flashMode === Camera.Constants.FlashMode.auto
+                      ? "flash-outline"
+                      : flashMode === Camera.Constants.FlashMode.on
+                      ? "flash"
+                      : "flash-off"
+                  }
+                  size={30}
+                  style={{ color: colors.white }}
+                />
+              </TouchableOpacity>
+              <TakePhotoBtn>
+                <TakePhotoCircle />
+                <TakePhotoBtnLine />
+              </TakePhotoBtn>
+              <TouchableOpacity onPress={onCameraType}>
+                <Ionicons
+                  name="camera-reverse"
+                  size={30}
+                  style={{ color: colors.white }}
+                />
+              </TouchableOpacity>
+            </ButtonsContainer>
           </Actions>
         </>
       )}
+      <CloseBtn onPress={onClose}>
+        <Ionicons name="close" size={30} color={colors.black} />
+      </CloseBtn>
     </Container>
   );
 }
