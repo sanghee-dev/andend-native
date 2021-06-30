@@ -82,7 +82,7 @@ export default function SelectPhoto() {
   useEffect(() => {
     getPermissions();
     navigation.setOptions({ headerRight: HeaderRight });
-  }, []);
+  }, [choosePhoto]);
 
   const numColumns = 3;
   const borderWidth = 3;
