@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import * as MediaLibrary from "expo-media-library";
-import { FlatList, Image, useWindowDimensions } from "react-native";
+import {
+  FlatList,
+  Image,
+  useWindowDimensions,
+  StatusBar,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import styled from "styled-components/native";
 import { colors } from "../../styles/colors";
 import { fonts } from "../../styles/fonts";
@@ -28,11 +35,17 @@ const IconContainer = styled.View`
   position: absolute;
   right: 0;
 `;
+const HeaderRightText = styled.Text`
+  font-size: 16px;
+  font-weight: 600;
+  margin-right: 10px;
+`;
 
 export default function SelectPhoto() {
   const [isOk, setIsOk] = useState<boolean>(false);
   const [photos, setPhotos] = useState([]);
   const [chosenPhotoUri, setChosenPhotoUri] = useState<string>("");
+  const navigation = useNavigation();
 
   const getPermissions = async () => {
     const { accessPrivileges, canAskAgain } =
@@ -56,8 +69,19 @@ export default function SelectPhoto() {
   };
   const choosePhoto = (uri): string => setChosenPhotoUri(uri);
 
+  const HeaderRight = () => (
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("UploadForm", { file: chosenPhotoUri })
+      }
+    >
+      <HeaderRightText>Next</HeaderRightText>
+    </TouchableOpacity>
+  );
+
   useEffect(() => {
     getPermissions();
+    navigation.setOptions({ headerRight: HeaderRight });
   }, []);
 
   const numColumns = 3;
@@ -94,6 +118,7 @@ export default function SelectPhoto() {
 
   return (
     <Container>
+      <StatusBar hidden={false} />
       <Top>
         {!isOk && <RequestText>Plz grant permissions :(</RequestText>}
         {isOk && chosenPhotoUri !== "" ? (

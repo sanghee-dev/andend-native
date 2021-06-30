@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useWindowDimensions, StatusBar, Image, Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import * as MediaLibrary from "expo-media-library";
 import { Camera } from "expo-camera";
 import styled from "styled-components/native";
@@ -66,11 +66,9 @@ const ButtonsContainer = styled.View`
 `;
 
 export default function TakePhoto() {
-  const cameraRef = useRef();
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [takenPhoto, setTakenPhoto] = useState<string>("");
   const [cameraReady, setCameraReady] = useState<boolean>(false);
-  const navigation = useNavigation();
   const [isOk, setIsOk] = useState<boolean>(false);
   const [cameraType, setCameraType] = useState<string>(
     Camera.Constants.Type.front
@@ -79,13 +77,14 @@ export default function TakePhoto() {
   const [flashMode, setFlashMode] = useState<string>(
     Camera.Constants.FlashMode.auto
   );
+  const cameraRef = useRef();
+  const navigation = useNavigation();
 
   const goToUpload = async (save): Promise<boolean> => {
     if (save) {
       await MediaLibrary.saveToLibraryAsync(takenPhoto);
-    } else {
-      // const photo = await MediaLibrary.createAssetAsync(takenPhoto);
     }
+    navigation.navigate("UploadForm", { file: takenPhoto });
   };
   const onUploadPhoto = () => {
     Alert.alert("Photo", "Do you want to save photo?", [
@@ -130,13 +129,20 @@ export default function TakePhoto() {
   };
   const onGoBack = () => navigation.goBack();
   const onTakenPhotoClose = () => setTakenPhoto("");
+
+  const isFocused = useIsFocused();
   useEffect(() => {
     getPermissions();
   }, []);
 
   return (
     <Container>
-      <StatusBar hidden={true} />
+      {isFocused ? (
+        <>
+          <StatusBar hidden={true} />
+        </>
+      ) : null}
+
       {!isOk ? (
         <RequestContainer>
           <RequestText>Plz grant permissions :(</RequestText>

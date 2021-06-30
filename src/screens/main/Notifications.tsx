@@ -5,7 +5,7 @@ import ScreenLayout from "../../components/layouts/ScreenLayout";
 export default function Notifications() {
   return (
     <ScreenLayout loading={false}>
-      <Text>Upload</Text>
+      <Text>Notifications</Text>
     </ScreenLayout>
   );
 }
